@@ -62,7 +62,8 @@ do
                                  [3:v]scale=50:50[logo]; \
                                  [video][logo]overlay=x=main_w-overlay_w-35:y=25:format=auto[outv]" \
             -c:a aac -ar 48000 -b:a 192k -map "[audio]" \
-            -map "[outv]" -c:v libx264 -crf 20 $FINSDIR/"$dofiles".mpg
+            -map "[outv]" -c:v libx264 -crf 20 \
+            -metadata:s handler_name="IT & Sound Dept -- Studio Family Karaoke" $FINSDIR/"$dofiles".mp4
         elif [ "$wvfiles" -ge 854 ] && [ "$wvfiles" -lt 1280 ]; then
             ffmpeg $FFOPT -i "$dafiles" -i "$difiles" -i "$dvfiles" -i "$ranlogo" \
                 -filter_complex "[0:a]aformat=channel_layouts=stereo[a0]; \
@@ -73,7 +74,8 @@ do
                                  [3:v]scale=45:45[logo]; \
                                  [video][logo]overlay=x=main_w-overlay_w-35:y=25:format=auto[outv]" \
             -c:a aac -ar 48000 -b:a 192k -map "[audio]" \
-            -map "[outv]" -c:v libx264 -crf 20 $FINSDIR/"$dofiles".mpg
+            -map "[outv]" -c:v libx264 -crf 20 \
+            -metadata:s handler_name="IT & Sound Dept -- Studio Family Karaoke" $FINSDIR/"$dofiles".mp4
         elif [ "$wvfiles" -lt 854 ]; then
             ffmpeg $FFOPT -i "$dafiles" -i "$difiles" -i "$dvfiles" -i "$ranlogo" \
                 -filter_complex "[0:a]aformat=channel_layouts=stereo[a0]; \
@@ -84,7 +86,8 @@ do
                                  [3:v]scale=40:40[logo]; \
                                  [video][logo]overlay=x=main_w-overlay_w-35:y=25:format=auto[outv]" \
             -c:a aac -ar 48000 -b:a 192k -map "[audio]" \
-            -map "[outv]" -c:v libx264 -crf 20 $FINSDIR/"$dofiles".mpg
+            -map "[outv]" -c:v libx264 -crf 20 \
+            -metadata:s handler_name="IT & Sound Dept -- Studio Family Karaoke" $FINSDIR/"$dofiles".mp4
         fi
     else
         echo "$dsfiles: Audio/video/logo files: NULL -OR- target file already exists."
