@@ -1,0 +1,10 @@
+#!/usr/bin/dash
+echo "BEC: "; mariadb --connect-timeout=3 -ubudsz -playangan76 -h 10.10.10.20 -e "SELECT nama_lengkap AS Nama, nama_jabatan AS Jabatan FROM payrollbec.t_pegawai AS P INNER JOIN payrollbec.t_jabatan AS J ON P.kode_jabatan = J.kode_jabatan WHERE P.absen = 'IN' ORDER BY nama_jabatan;"
+echo " "
+echo "Ciwalk: "; mariadb --connect-timeout=3 -ubudsz -playangan76 -h 10.10.10.24 -e "SELECT nama_lengkap AS Nama, nama_jabatan AS Jabatan FROM newpayroll.t_pegawai AS P INNER JOIN newpayroll.t_jabatan AS J ON P.kode_jabatan = J.kode_jabatan WHERE P.absen = 'IN' ORDER BY nama_jabatan;"
+echo " "
+echo "IPB: "; mariadb --connect-timeout=3 -ubudsz -playangan76 -h 10.10.10.26 -e "SELECT nama_lengkap AS Nama, nama_jabatan AS Jabatan FROM payrollipb.t_pegawai AS P INNER JOIN payrollipb.t_jabatan AS J ON P.kode_jabatan = J.kode_jabatan WHERE P.absen = 'IN' ORDER BY nama_jabatan;"
+echo " "
+echo "Sumedang: "; mariadb --connect-timeout=3 -ubudsz -playangan76 -h 10.10.10.28 -e "SELECT nama_lengkap AS Nama, nama_jabatan AS Jabatan FROM payrollsmd.t_pegawai AS P INNER JOIN payrollsmd.t_jabatan AS J ON P.kode_jabatan = J.kode_jabatan WHERE P.absen = 'IN' ORDER BY nama_jabatan;"
+echo " "
+echo "Sampit: "; mariadb --connect-timeout=3 -ubudsz -playangan76 -h 10.10.10.30 -e "SELECT nama_lengkap AS Nama, nama_jabatan AS Jabatan FROM payroll.t_pegawai AS P INNER JOIN payroll.t_jabatan AS J ON P.kode_jabatan = J.kode_jabatan WHERE P.absen = 'IN' ORDER BY nama_jabatan;"
