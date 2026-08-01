@@ -64,7 +64,7 @@ do
             -c:a aac -ar 48000 -b:a 192k -map "[audio]" \
             -map "[outv]" -c:v libx264 -crf 20 \
             -metadata:s handler_name="IT & Sound Dept -- Studio Family Karaoke" \
-            -metadata:g encoding_tool="Modified Encoding by eSFK-1.0.5" \
+            -metadata:g encoding_tool="Modified Encoding by eSFK-1.0.5-uar8fps0" \
             -fflags +bitexact -flags:v +bitexact -flags:a +bitexact \
             $FINSDIR/"$dofiles".mp4
         elif [ "$wvfiles" -ge 854 ] && [ "$wvfiles" -lt 1280 ]; then
@@ -79,7 +79,7 @@ do
             -c:a aac -ar 48000 -b:a 192k -map "[audio]" \
             -map "[outv]" -c:v libx264 -crf 20 \
             -metadata:s handler_name="IT & Sound Dept -- Studio Family Karaoke" \
-            -metadata:g encoding_tool="Modified Encoding by eSFK-1.0.5" \
+            -metadata:g encoding_tool="Modified Encoding by eSFK-1.0.5-uar8fps0" \
             -fflags +bitexact -flags:v +bitexact -flags:a +bitexact \
             $FINSDIR/"$dofiles".mp4
         elif [ "$wvfiles" -lt 854 ]; then
@@ -94,7 +94,7 @@ do
             -c:a aac -ar 48000 -b:a 192k -map "[audio]" \
             -map "[outv]" -c:v libx264 -crf 20 \
             -metadata:s handler_name="IT & Sound Dept -- Studio Family Karaoke" \
-            -metadata:g encoding_tool="Modified Encoding by eSFK-1.0.5" \
+            -metadata:g encoding_tool="Modified Encoding by eSFK-1.0.5-uar8fps0" \
             -fflags +bitexact -flags:v +bitexact -flags:a +bitexact \
             $FINSDIR/"$dofiles".mp4
         fi
