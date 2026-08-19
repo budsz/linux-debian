@@ -35,25 +35,25 @@ fi
 echo "${IFL}" | while read -r difiles
 do
     ## Get layout SINGER - TITLE format from instrument files.
-    dsfiles="$(echo $difiles | awk -F ' - ' '{print $1, "-", $2}' | sed 's/\(.*\)d-aud-//;s/\(.*\)f-aud-//')"
-    dtfiles="$(echo $difiles | cut -d '-' -f 3,4,5 | sed 's/_(Instrumental).wav//')"
-    dofiles="$(echo $dtfiles - MR)"
+    dfsfiles="$(echo $difiles | awk -F ' - ' '{print $1, "-", $2}' | sed 's/\(.*\)d-aud-//;s/\(.*\)f-aud-//')"
+    dftfiles="$(echo $difiles | cut -d '-' -f 3,4,5 | sed 's/_(Instrumental).wav//')"
+    dfofiles="$(echo $dftfiles - MR)"
 
     ## Build list audio/video files except instrument files.
-    dafiles="$(find * -type f -name "d-aud*$dsfiles*" \! -iname "*_(Instrumental)*")"
-    dvfiles="$(find * -type f -name "d-vid*$dsfiles*")"
+    dfafiles="$(find * -type f \( -name "d-aud*$dfsfiles*" -or -name "f-aud*$dfsfiles*" \) \! -iname "*_(Instrumental)*")"
+    dfvfiles="$(find * -type f \( -name "d-vid*$dfsfiles*" -or -name "f-vid*$dfsfiles*" \) )"
 
     ## Random logo files.
-    ranlogo="$(find $LOGODIR -maxdepth 1 -type f -name "$LOGONAME-*.svg" | shuf -n 1)"
+    ranlogos="$(find $LOGODIR -maxdepth 1 -type f -name "$LOGONAME-*.svg" | shuf -n 1)"
 
     ## Rendering audio + video + logo.
-    #if [ -n "$dafiles" ] && [ -n "$dvfiles" ] && [ ! -f $FINSDIR/"$dofiles".mpg ]; then
-    if [ -n "$dafiles" ] && [ -n "$dvfiles" ]; then
+    #if [ -n "$dfafiles" ] && [ -n "$dfvfiles" ] && [ ! -f $FINSDIR/"$dfofiles".mpg ]; then
+    if [ -n "$dfafiles" ] && [ -n "$dfvfiles" ]; then
         ## Checking width video files.
-        wvfiles="$(ffprobe -v error -select_streams v:0 -show_entries stream=width -of csv=p=0 -i "$dvfiles")"
+        wvfiles="$(ffprobe -v error -select_streams v:0 -show_entries stream=width -of csv=p=0 -i "$dfvfiles")"
 
         if [ "$wvfiles" -ge 1280 ]; then
-            ffmpeg $FFOPT -i "$dafiles" -i "$difiles" -i "$dvfiles" -i "$ranlogo" \
+            ffmpeg $FFOPT -i "$dfafiles" -i "$difiles" -i "$dfvfiles" -i "$ranlogos" \
                 -filter_complex "[0:a]aformat=channel_layouts=stereo[a0]; \
                                  [1:a]aformat=channel_layouts=stereo[a1]; \
                                  [a0][a1]amerge=inputs=2, \
@@ -62,9 +62,9 @@ do
                                  [3:v]scale=50:50[logo]; \
                                  [video][logo]overlay=x=main_w-overlay_w-35:y=25:format=auto[outv]" \
             -c:a mp2 -q:a 3 -b:a 320K -ar 48000 -map "[audio]" \
-            -map "[outv]" -c:v mpeg2video -q:v 12 -r 25 -b:v 4000k -maxrate 6000k -bufsize 8000k $FINSDIR/"$dofiles".mpg
+            -map "[outv]" -c:v mpeg2video -q:v 12 -r 25 -b:v 4000k -maxrate 6000k -bufsize 8000k $FINSDIR/"$dfofiles".mpg
         elif [ "$wvfiles" -ge 854 ] && [ "$wvfiles" -lt 1280 ]; then
-            ffmpeg $FFOPT -i "$dafiles" -i "$difiles" -i "$dvfiles" -i "$ranlogo" \
+            ffmpeg $FFOPT -i "$dfafiles" -i "$difiles" -i "$dfvfiles" -i "$ranlogos" \
                 -filter_complex "[0:a]aformat=channel_layouts=stereo[a0]; \
                                  [1:a]aformat=channel_layouts=stereo[a1]; \
                                  [a0][a1]amerge=inputs=2, \
@@ -73,9 +73,9 @@ do
                                  [3:v]scale=45:45[logo]; \
                                  [video][logo]overlay=x=main_w-overlay_w-35:y=25:format=auto[outv]" \
             -c:a mp2 -q:a 3 -b:a 320K -ar 48000 -map "[audio]" \
-            -map "[outv]" -c:v mpeg2video -q:v 12 -r 25 -b:v 4000k -maxrate 6000k -bufsize 8000k $FINSDIR/"$dofiles".mpg
+            -map "[outv]" -c:v mpeg2video -q:v 12 -r 25 -b:v 4000k -maxrate 6000k -bufsize 8000k $FINSDIR/"$dfofiles".mpg
         elif [ "$wvfiles" -lt 854 ]; then
-            ffmpeg $FFOPT -i "$dafiles" -i "$difiles" -i "$dvfiles" -i "$ranlogo" \
+            ffmpeg $FFOPT -i "$dfafiles" -i "$difiles" -i "$dfvfiles" -i "$ranlogos" \
                 -filter_complex "[0:a]aformat=channel_layouts=stereo[a0]; \
                                  [1:a]aformat=channel_layouts=stereo[a1]; \
                                  [a0][a1]amerge=inputs=2, \
@@ -84,10 +84,10 @@ do
                                  [3:v]scale=40:40[logo]; \
                                  [video][logo]overlay=x=main_w-overlay_w-35:y=25:format=auto[outv]" \
             -c:a mp2 -q:a 3 -b:a 320K -ar 48000 -map "[audio]" \
-            -map "[outv]" -c:v mpeg2video -q:v 12 -r 25 -b:v 4000k -maxrate 6000k -bufsize 8000k $FINSDIR/"$dofiles".mpg
+            -map "[outv]" -c:v mpeg2video -q:v 12 -r 25 -b:v 4000k -maxrate 6000k -bufsize 8000k $FINSDIR/"$dfofiles".mpg
         fi
     else
-        echo "$dsfiles: Audio/video/logo files: NULL -OR- target file already exists."
+        echo "$dfsfiles: Audio/video/logo files: NULL -OR- target file already exists."
     fi
 done
 
