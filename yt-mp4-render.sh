@@ -57,37 +57,7 @@ do
         ## Checking width video files.
         wvfiles="$(ffprobe -v error -select_streams v:0 -show_entries stream=width -of csv=p=0 -i "$yfvfiles")"
 
-        if [ "$wvfiles" -ge 1280 ]; then
-            ffmpeg $FFOPT -i "$yfafiles" -i "$yfafiles" -i "$yfvfiles" -i "$ranlogos" \
-                -filter_complex "[0:a]aformat=channel_layouts=stereo[a0]; \
-                                 [1:a]aformat=channel_layouts=stereo[a1]; \
-                                 [a0][a1]amerge=inputs=2, \
-                                 pan=stereo|c0=c0|c1=c2[audio], \
-                                 [2:v]scale=-2:720[video]; \
-                                 [3:v]scale=50:50[logo]; \
-                                 [video][logo]overlay=x=main_w-overlay_w-35:y=25:format=auto[outv]" \
-            -c:a aac -ar 48000 -b:a 192k -map "[audio]" \
-            -map "[outv]" -c:v libx264 -crf 20 \
-            -metadata:s handler_name="IT & Sound Dept -- Studio Family Karaoke" \
-            -metadata:g encoding_tool="Modified Encoding by eSFK-1.0.5-uar8fps0" \
-            -fflags +bitexact -flags:v +bitexact -flags:a +bitexact \
-            $FINSDIR/"$yfofiles".mp4
-        elif [ "$wvfiles" -ge 854 ] && [ "$wvfiles" -lt 1280 ]; then
-            ffmpeg $FFOPT -i "$yfafiles" -i "$yfafiles" -i "$yfvfiles" -i "$ranlogos" \
-                -filter_complex "[0:a]aformat=channel_layouts=stereo[a0]; \
-                                 [1:a]aformat=channel_layouts=stereo[a1]; \
-                                 [a0][a1]amerge=inputs=2, \
-                                 pan=stereo|c0=c0|c1=c2[audio], \
-                                 [2:v]scale=-2:720[video]; \
-                                 [3:v]scale=45:45[logo]; \
-                                 [video][logo]overlay=x=main_w-overlay_w-35:y=25:format=auto[outv]" \
-            -c:a aac -ar 48000 -b:a 192k -map "[audio]" \
-            -map "[outv]" -c:v libx264 -crf 20 \
-            -metadata:s handler_name="IT & Sound Dept -- Studio Family Karaoke" \
-            -metadata:g encoding_tool="Modified Encoding by eSFK-1.0.5-uar8fps0" \
-            -fflags +bitexact -flags:v +bitexact -flags:a +bitexact \
-            $FINSDIR/"$yfofiles".mp4
-        elif [ "$wvfiles" -lt 854 ]; then
+        if [ "$wvfiles" -ge 640 ]; then
             ffmpeg $FFOPT -i "$yfafiles" -i "$yfafiles" -i "$yfvfiles" -i "$ranlogos" \
                 -filter_complex "[0:a]aformat=channel_layouts=stereo[a0]; \
                                  [1:a]aformat=channel_layouts=stereo[a1]; \
@@ -95,6 +65,36 @@ do
                                  pan=stereo|c0=c0|c1=c2[audio], \
                                  [2:v]scale=-2:720[video]; \
                                  [3:v]scale=40:40[logo]; \
+                                 [video][logo]overlay=x=main_w-overlay_w-35:y=25:format=auto[outv]" \
+            -c:a aac -ar 48000 -b:a 192k -map "[audio]" \
+            -map "[outv]" -c:v libx264 -crf 20 \
+            -metadata:s handler_name="IT & Sound Dept -- Studio Family Karaoke" \
+            -metadata:g encoding_tool="Modified Encoding by eSFK-1.0.5-uar8fps0" \
+            -fflags +bitexact -flags:v +bitexact -flags:a +bitexact \
+            $FINSDIR/"$yfofiles".mp4
+        elif [ "$wvfiles" -ge 384 ] && [ "$wvfiles" -lt 640 ]; then
+            ffmpeg $FFOPT -i "$yfafiles" -i "$yfafiles" -i "$yfvfiles" -i "$ranlogos" \
+                -filter_complex "[0:a]aformat=channel_layouts=stereo[a0]; \
+                                 [1:a]aformat=channel_layouts=stereo[a1]; \
+                                 [a0][a1]amerge=inputs=2, \
+                                 pan=stereo|c0=c0|c1=c2[audio], \
+                                 [2:v]scale=-2:720[video]; \
+                                 [3:v]scale=35:35[logo]; \
+                                 [video][logo]overlay=x=main_w-overlay_w-35:y=25:format=auto[outv]" \
+            -c:a aac -ar 48000 -b:a 192k -map "[audio]" \
+            -map "[outv]" -c:v libx264 -crf 20 \
+            -metadata:s handler_name="IT & Sound Dept -- Studio Family Karaoke" \
+            -metadata:g encoding_tool="Modified Encoding by eSFK-1.0.5-uar8fps0" \
+            -fflags +bitexact -flags:v +bitexact -flags:a +bitexact \
+            $FINSDIR/"$yfofiles".mp4
+        elif [ "$wvfiles" -lt 384 ]; then
+            ffmpeg $FFOPT -i "$yfafiles" -i "$yfafiles" -i "$yfvfiles" -i "$ranlogos" \
+                -filter_complex "[0:a]aformat=channel_layouts=stereo[a0]; \
+                                 [1:a]aformat=channel_layouts=stereo[a1]; \
+                                 [a0][a1]amerge=inputs=2, \
+                                 pan=stereo|c0=c0|c1=c2[audio], \
+                                 [2:v]scale=-2:720[video]; \
+                                 [3:v]scale=30:30[logo]; \
                                  [video][logo]overlay=x=main_w-overlay_w-35:y=25:format=auto[outv]" \
             -c:a aac -ar 48000 -b:a 192k -map "[audio]" \
             -map "[outv]" -c:v libx264 -crf 20 \
