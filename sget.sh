@@ -349,6 +349,7 @@ vtten="$(ls *$UUIDG.en*.vtt 2> /dev/null)"
 vttsu="$(ls *$UUIDG.su*.vtt 2> /dev/null)"
 vttms="$(ls *$UUIDG.ms*.vtt 2> /dev/null)"
 vttja="$(ls *$UUIDG.ja*.vtt 2> /dev/null)"
+vttst="$(ls st.vtt 2> /dev/null)"
 
 # Burning subtitle to video.
 if [ -f "$UUIDG.mp4" ] && [ -f "$vttid" ]; then
@@ -374,10 +375,15 @@ elif [ -f "$UUIDG.mp4" ] && [ -f "$vttms" ]; then
 elif [ -f "$UUIDG.mp4" ] && [ -f "$vttja" ]; then
     ffmpeg $FFOPT -i "$UUIDG.mp4" -vf subtitles="$vttja" "d-vid-$IDX.mp4"
     echo "Creating d-vid-$IDX.mp4 file has been successful."
+elif [ -f "$UUIDG.mp4" ] && [ -f "$vttst" ]; then
+    ffmpeg $FFOPT -i "$UUIDG.mp4" -vf subtitles="$vttst" "d-vid-$IDX.mp4"
+    echo "Creating d-vid-$IDX.mp4 file has been successful."
+else
+    echo "Subtitle files not found!"
 fi
 
 # Remove ${_tmpfile}, *"$UUIDG"*.
-rm -f $_tmpfile *${UUIDG}*
+rm -f $_tmpfile *${UUIDG}* st.vtt
 
 # CD current directory.
 cd
