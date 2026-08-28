@@ -57,7 +57,7 @@ do
         ## Checking width video files.
         wvfiles="$(ffprobe -v error -select_streams v:0 -show_entries stream=width -of csv=p=0 -i "$yfvfiles")"
 
-        if [ "$wvfiles" -ge 640 ]; then
+        if [ "$wvfiles" -ge 1280 ]; then
             ffmpeg $FFOPT -i "$yfafiles" -i "$yfafiles" -i "$yfvfiles" -i "$ranlogos" \
                 -filter_complex "[0:a]aformat=channel_layouts=stereo[a0]; \
                                  [1:a]aformat=channel_layouts=stereo[a1]; \
@@ -72,7 +72,7 @@ do
             -metadata:g encoding_tool="Modified Encoding by eSFK-1.0.5-uar8fps0" \
             -fflags +bitexact -flags:v +bitexact -flags:a +bitexact \
             $FINSDIR/"$yfofiles".mp4
-        elif [ "$wvfiles" -ge 384 ] && [ "$wvfiles" -lt 640 ]; then
+        elif [ "$wvfiles" -ge 854 ] && [ "$wvfiles" -lt 1280 ]; then
             ffmpeg $FFOPT -i "$yfafiles" -i "$yfafiles" -i "$yfvfiles" -i "$ranlogos" \
                 -filter_complex "[0:a]aformat=channel_layouts=stereo[a0]; \
                                  [1:a]aformat=channel_layouts=stereo[a1]; \
@@ -87,7 +87,7 @@ do
             -metadata:g encoding_tool="Modified Encoding by eSFK-1.0.5-uar8fps0" \
             -fflags +bitexact -flags:v +bitexact -flags:a +bitexact \
             $FINSDIR/"$yfofiles".mp4
-        elif [ "$wvfiles" -lt 384 ]; then
+        elif [ "$wvfiles" -lt 854 ]; then
             ffmpeg $FFOPT -i "$yfafiles" -i "$yfafiles" -i "$yfvfiles" -i "$ranlogos" \
                 -filter_complex "[0:a]aformat=channel_layouts=stereo[a0]; \
                                  [1:a]aformat=channel_layouts=stereo[a1]; \
