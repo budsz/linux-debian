@@ -350,6 +350,7 @@ case ${VR} in
         ;;
     *)
         echo "Error: Please input 1 = 720p (1280x720), 2 = 480p (854x480), 3 = 360p (640x360), 4 = 240p (384x288), 5 = MP3 (Audio only) from keyboard!"
+        exit 1
         ;;
 esac
 
