@@ -63,8 +63,8 @@ do
                                  [1:a]aformat=channel_layouts=stereo[a1]; \
                                  [a0][a1]amerge=inputs=2, \
                                  pan=stereo|c0=c0|c1=c2[audio], \
-                                 [2:v]scale=-2:720[video]; \
-                                 [3:v]scale=40:40[logo]; \
+                                 [2:v]scale=-2:$wvfiles[video]; \
+                                 [3:v]scale=80:80[logo]; \
                                  [video][logo]overlay=x=main_w-overlay_w-35:y=25:format=auto[outv]" \
             -c:a aac -ar 48000 -b:a 192k -map "[audio]" \
             -map "[outv]" -c:v libx264 -crf 20 \
@@ -78,8 +78,8 @@ do
                                  [1:a]aformat=channel_layouts=stereo[a1]; \
                                  [a0][a1]amerge=inputs=2, \
                                  pan=stereo|c0=c0|c1=c2[audio], \
-                                 [2:v]scale=-2:720[video]; \
-                                 [3:v]scale=35:35[logo]; \
+                                 [2:v]scale=-2:$wvfiles[video]; \
+                                 [3:v]scale=60:60[logo]; \
                                  [video][logo]overlay=x=main_w-overlay_w-35:y=25:format=auto[outv]" \
             -c:a aac -ar 48000 -b:a 192k -map "[audio]" \
             -map "[outv]" -c:v libx264 -crf 20 \
@@ -93,8 +93,8 @@ do
                                  [1:a]aformat=channel_layouts=stereo[a1]; \
                                  [a0][a1]amerge=inputs=2, \
                                  pan=stereo|c0=c0|c1=c2[audio], \
-                                 [2:v]scale=-2:720[video]; \
-                                 [3:v]scale=30:30[logo]; \
+                                 [2:v]scale=-2:$wvfiles[video]; \
+                                 [3:v]scale=40:40[logo]; \
                                  [video][logo]overlay=x=main_w-overlay_w-35:y=25:format=auto[outv]" \
             -c:a aac -ar 48000 -b:a 192k -map "[audio]" \
             -map "[outv]" -c:v libx264 -crf 20 \
