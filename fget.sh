@@ -107,31 +107,31 @@ GETAUD() {
 # Download video clip.
 ## 720p (1280x720).
 if [ -n "$vs720p" -a -z "$vs12xx" ]; then
-    echo "$vs720p" | tail -n 1 | while read -r dvs720p
+    echo "$vs720p" | tail -n 1 | while read -r vr720p
     do
         GETAUD
-        yt-dlp $YTOPT -f $dvs720p -o "f-vid-$IDX.mp4" "$URL"
+        yt-dlp $YTOPT -f $vr720p -o "f-vid-$IDX.mp4" "$URL"
         cproc=$?
         if [ "$cproc" -eq 1 ]; then
             ccount=0
             until [ "$cproc" -eq 0 ] || [ "$ccount" -eq 2 ]
             do
-                yt-dlp $YTOPT -f $dvs720p -o "f-vid-$IDX.mp4" "$URL"
+                yt-dlp $YTOPT -f $vr720p -o "f-vid-$IDX.mp4" "$URL"
                 cproc=$?
                 ccount=$((ccount + 1))
             done
         fi
     done
 elif [ -n "$vs12xx" -a -z "$vs720p" ]; then
-    echo "$vs12xx" | tail -n 1 | while read -r dv12xx
+    echo "$vs12xx" | tail -n 1 | while read -r vr12xx
     do
-        yt-dlp $YTOPT -f $dv12xx -o "f-aud+f-vid-$IDX.mp4" "$URL"
+        yt-dlp $YTOPT -f $vr12xx -o "f-aud+f-vid-$IDX.mp4" "$URL"
         cproc=$?
         if [ "$cproc" -eq 1 ]; then
             ccount=0
             until [ "$cproc" -eq 0 ] || [ "$ccount" -eq 2 ]
             do
-                yt-dlp $YTOPT -f $dv12xx -o "f-aud+f-vid-$IDX.mp4" "$URL"
+                yt-dlp $YTOPT -f $vr12xx -o "f-aud+f-vid-$IDX.mp4" "$URL"
                 cproc=$?
                 ccount=$((ccount + 1))
             done
@@ -144,16 +144,16 @@ elif [ -n "$vs12xx" -a -z "$vs720p" ]; then
         echo "Creating f-vid-$IDX.mp4 file has been successful."
     done
 elif [ -n "$vs720p" -a -n "$vs12xx" ]; then
-    echo "$vs720p" | tail -n 1 | while read -r dvs720p
+    echo "$vs720p" | tail -n 1 | while read -r vr720p
     do
         GETAUD
-        yt-dlp $YTOPT -f $dvs720p -o "f-vid-$IDX.mp4" "$URL"
+        yt-dlp $YTOPT -f $vr720p -o "f-vid-$IDX.mp4" "$URL"
         cproc=$?
         if [ "$cproc" -eq 1 ]; then
             ccount=0
             until [ "$cproc" -eq 0 ] || [ "$ccount" -eq 2 ]
             do
-                yt-dlp $YTOPT -f $dvs720p -o "f-vid-$IDX.mp4" "$URL"
+                yt-dlp $YTOPT -f $vr720p -o "f-vid-$IDX.mp4" "$URL"
                 cproc=$?
                 ccount=$((ccount + 1))
             done
@@ -162,31 +162,31 @@ elif [ -n "$vs720p" -a -n "$vs12xx" ]; then
 
 ## 480p (854x480).
 elif [ -n "$vs480p" -a -z "$vs8xx" ]; then
-    echo "$vs480p" | tail -n 1 | while read -r dvs480p
+    echo "$vs480p" | tail -n 1 | while read -r vr480p
     do
         GETAUD
-        yt-dlp $YTOPT -f $dvs480p -o "f-vid-$IDX.mp4" "$URL"
+        yt-dlp $YTOPT -f $vr480p -o "f-vid-$IDX.mp4" "$URL"
         cproc=$?
         if [ "$cproc" -eq 1 ]; then
             ccount=0
             until [ "$cproc" -eq 0 ] || [ "$ccount" -eq 2 ]
             do
-                yt-dlp $YTOPT -f $dvs480p -o "f-vid-$IDX.mp4" "$URL"
+                yt-dlp $YTOPT -f $vr480p -o "f-vid-$IDX.mp4" "$URL"
                 cproc=$?
                 ccount=$((ccount + 1))
             done
         fi
     done
 elif [ -n "$vs8xx" -a -z "$vs480p" ]; then
-    echo "$vs8xx" | tail -n 1 | while read -r dv8xx
+    echo "$vs8xx" | tail -n 1 | while read -r vr8xx
     do
-        yt-dlp $YTOPT -f $dv8xx -o "f-aud+f-vid-$IDX.mp4" "$URL"
+        yt-dlp $YTOPT -f $vr8xx -o "f-aud+f-vid-$IDX.mp4" "$URL"
         cproc=$?
         if [ "$cproc" -eq 1 ]; then
             ccount=0
             until [ "$cproc" -eq 0 ] || [ "$ccount" -eq 2 ]
             do
-                yt-dlp $YTOPT -f $dv8xx -o "f-aud+f-vid-$IDX.mp4" "$URL"
+                yt-dlp $YTOPT -f $vr8xx -o "f-aud+f-vid-$IDX.mp4" "$URL"
                 cproc=$?
                 ccount=$((ccount + 1))
             done
@@ -199,16 +199,16 @@ elif [ -n "$vs8xx" -a -z "$vs480p" ]; then
         echo "Creating f-vid-$IDX.mp4 file has been successful."
     done
 elif [ -n "$vs480p" -a -n "$vs8xx" ]; then
-    echo "$vs480p" | tail -n 1 | while read -r dvs480p
+    echo "$vs480p" | tail -n 1 | while read -r vr480p
     do
         GETAUD
-        yt-dlp $YTOPT -f $dvs480p -o "f-vid-$IDX.mp4" "$URL"
+        yt-dlp $YTOPT -f $vr480p -o "f-vid-$IDX.mp4" "$URL"
         cproc=$?
         if [ "$cproc" -eq 1 ]; then
             ccount=0
             until [ "$cproc" -eq 0 ] || [ "$ccount" -eq 2 ]
             do
-                yt-dlp $YTOPT -f $dvs480p -o "f-vid-$IDX.mp4" "$URL"
+                yt-dlp $YTOPT -f $vr480p -o "f-vid-$IDX.mp4" "$URL"
                 cproc=$?
                 ccount=$((ccount + 1))
             done
@@ -217,31 +217,31 @@ elif [ -n "$vs480p" -a -n "$vs8xx" ]; then
 
 ## 360p (640x360).
 elif [ -n "$vs360p" -a -z "$vs6xx" ]; then
-    echo "$vs360p" | tail -n 1 | while read -r dvs360p
+    echo "$vs360p" | tail -n 1 | while read -r vr360p
     do
         GETAUD
-        yt-dlp $YTOPT -f $dvs360p -o "f-vid-$IDX.mp4" "$URL"
+        yt-dlp $YTOPT -f $vr360p -o "f-vid-$IDX.mp4" "$URL"
         cproc=$?
         if [ "$cproc" -eq 1 ]; then
             ccount=0
             until [ "$cproc" -eq 0 ] || [ "$ccount" -eq 2 ]
             do
-                yt-dlp $YTOPT -f $dvs360p -o "f-vid-$IDX.mp4" "$URL"
+                yt-dlp $YTOPT -f $vr360p -o "f-vid-$IDX.mp4" "$URL"
                 cproc=$?
                 ccount=$((ccount + 1))
             done
         fi
     done
 elif [ -n "$vs6xx" -a -z "$vs360p" ]; then
-    echo "$vs6xx" | tail -n 1 | while read -r dv6xx
+    echo "$vs6xx" | tail -n 1 | while read -r vr6xx
     do
-        yt-dlp $YTOPT -f $dv6xx -o "f-aud+f-vid-$IDX.mp4" "$URL"
+        yt-dlp $YTOPT -f $vr6xx -o "f-aud+f-vid-$IDX.mp4" "$URL"
         cproc=$?
         if [ "$cproc" -eq 1 ]; then
             ccount=0
             until [ "$cproc" -eq 0 ] || [ "$ccount" -eq 2 ]
             do
-                yt-dlp $YTOPT -f $dv6xx -o "f-aud+f-vid-$IDX.mp4" "$URL"
+                yt-dlp $YTOPT -f $vr6xx -o "f-aud+f-vid-$IDX.mp4" "$URL"
                 cproc=$?
                 ccount=$((ccount + 1))
             done
@@ -254,16 +254,16 @@ elif [ -n "$vs6xx" -a -z "$vs360p" ]; then
         echo "Creating f-vid-$IDX.mp4 file has been successful."
     done
 elif [ -n "$vs360p" -a -n "$vs6xx" ]; then
-    echo "$vs360p" | tail -n 1 | while read -r dvs360p
+    echo "$vs360p" | tail -n 1 | while read -r vr360p
     do
         GETAUD
-        yt-dlp $YTOPT -f $dvs360p -o "f-vid-$IDX.mp4" "$URL"
+        yt-dlp $YTOPT -f $vr360p -o "f-vid-$IDX.mp4" "$URL"
         cproc=$?
         if [ "$cproc" -eq 1 ]; then
             ccount=0
             until [ "$cproc" -eq 0 ] || [ "$ccount" -eq 2 ]
             do
-                yt-dlp $YTOPT -f $dvs360p -o "f-vid-$IDX.mp4" "$URL"
+                yt-dlp $YTOPT -f $vr360p -o "f-vid-$IDX.mp4" "$URL"
                 cproc=$?
                 ccount=$((ccount + 1))
             done
@@ -272,31 +272,31 @@ elif [ -n "$vs360p" -a -n "$vs6xx" ]; then
 
 ## 240p (384x288).
 elif [ -n "$vs240p" -a -z "$vs3xx" ]; then
-    echo "$vs240p" | tail -n 1 | while read -r dvs240p
+    echo "$vs240p" | tail -n 1 | while read -r vr240p
     do
         GETAUD
-        yt-dlp $YTOPT -f $dvs240p -o "f-vid-$IDX.mp4" "$URL"
+        yt-dlp $YTOPT -f $vr240p -o "f-vid-$IDX.mp4" "$URL"
         cproc=$?
         if [ "$cproc" -eq 1 ]; then
             ccount=0
             until [ "$cproc" -eq 0 ] || [ "$ccount" -eq 2 ]
             do
-                yt-dlp $YTOPT -f $dvs240p -o "f-vid-$IDX.mp4" "$URL"
+                yt-dlp $YTOPT -f $vr240p -o "f-vid-$IDX.mp4" "$URL"
                 cproc=$?
                 ccount=$((ccount + 1))
             done
         fi
     done
 elif [ -n "$vs3xx" -a -z "$vs240p" ]; then
-    echo "$vs3xx" | tail -n 1 | while read -r dv3xx
+    echo "$vs3xx" | tail -n 1 | while read -r vr3xx
     do
-        yt-dlp $YTOPT -f $dv3xx -o "f-aud+f-vid-$IDX.mp4" "$URL"
+        yt-dlp $YTOPT -f $vr3xx -o "f-aud+f-vid-$IDX.mp4" "$URL"
         cproc=$?
         if [ "$cproc" -eq 1 ]; then
             ccount=0
             until [ "$cproc" -eq 0 ] || [ "$ccount" -eq 2 ]
             do
-                yt-dlp $YTOPT -f $dv3xx -o "f-aud+f-vid-$IDX.mp4" "$URL"
+                yt-dlp $YTOPT -f $vr3xx -o "f-aud+f-vid-$IDX.mp4" "$URL"
                 cproc=$?
                 ccount=$((ccount + 1))
             done
@@ -309,16 +309,16 @@ elif [ -n "$vs3xx" -a -z "$vs240p" ]; then
         echo "Creating f-vid-$IDX.mp4 file has been successful."
     done
 elif [ -n "$vs240p" -a -n "$vs3xx" ]; then
-    echo "$vs240p" | tail -n 1 | while read -r dvs240p
+    echo "$vs240p" | tail -n 1 | while read -r vr240p
     do
         GETAUD
-        yt-dlp $YTOPT -f $dvs240p -o "f-vid-$IDX.mp4" "$URL"
+        yt-dlp $YTOPT -f $vr240p -o "f-vid-$IDX.mp4" "$URL"
         cproc=$?
         if [ "$cproc" -eq 1 ]; then
             ccount=0
             until [ "$cproc" -eq 0 ] || [ "$ccount" -eq 2 ]
             do
-                yt-dlp $YTOPT -f $dvs240p -o "f-vid-$IDX.mp4" "$URL"
+                yt-dlp $YTOPT -f $vr240p -o "f-vid-$IDX.mp4" "$URL"
                 cproc=$?
                 ccount=$((ccount + 1))
             done
