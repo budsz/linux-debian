@@ -135,15 +135,15 @@ done
 # Download video clip.
 ## Priority base on video size.
 if [ -n "$vs12xx" ]; then
-    echo "$vs12xx" | tail -n 1 | while read -r dv12xx
+    echo "$vs12xx" | tail -n 1 | while read -r vr12xx
     do
-        yt-dlp $YTOPT -f $dv12xx -o "$UUIDG.%(ext)s" --write-subs --sub-lang=$sublang $URL
+        yt-dlp $YTOPT -f $vr12xx -o "$UUIDG.%(ext)s" --write-subs --sub-lang=$sublang $URL
 
         cproc="$(echo $?)"
         if [ $cproc -eq "1" ]; then
             until [ $cproc -eq "0" ]
             do
-                yt-dlp $YTOPT -f $dv12xx -o "$UUIDG.%(ext)s" --write-subs --sub-lang=$sublang $URL
+                yt-dlp $YTOPT -f $vr12xx -o "$UUIDG.%(ext)s" --write-subs --sub-lang=$sublang $URL
                 sleep `shuf -i $RANDE -n 1`
                 cproc="$(echo $?)"
             done
@@ -165,15 +165,15 @@ elif [ -n "$vs10xx" ]; then
         fi
     done
 elif [ -n "$vs8xx" ]; then
-    echo "$vs8xx" | tail -n 1 | while read -r dv8xx
+    echo "$vs8xx" | tail -n 1 | while read -r vr8xx
     do
-        yt-dlp $YTOPT -f $dv8xx -o "$UUIDG.%(ext)s" --write-subs --sub-lang=$sublang $URL
+        yt-dlp $YTOPT -f $vr8xx -o "$UUIDG.%(ext)s" --write-subs --sub-lang=$sublang $URL
 
         cproc="$(echo $?)"
         if [ $cproc -eq "1" ]; then
             until [ $cproc -eq "0" ]
             do
-                yt-dlp $YTOPT -f $dv8xx -o "$UUIDG.%(ext)s" --write-subs --sub-lang=$sublang $URL
+                yt-dlp $YTOPT -f $vr8xx -o "$UUIDG.%(ext)s" --write-subs --sub-lang=$sublang $URL
                 sleep `shuf -i $RANDE -n 1`
                 cproc="$(echo $?)"
             done
@@ -195,15 +195,15 @@ elif [ -n "$vs7xx" ]; then
         fi
     done
 elif [ -n "$vs6xx" ]; then
-    echo "$vs6xx" | tail -n 1 | while read -r dv6xx
+    echo "$vs6xx" | tail -n 1 | while read -r vr6xx
     do
-        yt-dlp $YTOPT -f $dv6xx -o "$UUIDG.%(ext)s" --write-subs --sub-lang=$sublang $URL
+        yt-dlp $YTOPT -f $vr6xx -o "$UUIDG.%(ext)s" --write-subs --sub-lang=$sublang $URL
 
         cproc="$(echo $?)"
         if [ $cproc -eq "1" ]; then
             until [ $cproc -eq "0" ]
             do
-                yt-dlp $YTOPT -f $dv6xx -o "$UUIDG.%(ext)s" --write-subs --sub-lang=$sublang $URL
+                yt-dlp $YTOPT -f $vr6xx -o "$UUIDG.%(ext)s" --write-subs --sub-lang=$sublang $URL
                 sleep `shuf -i $RANDE -n 1`
                 cproc="$(echo $?)"
             done
@@ -240,15 +240,15 @@ elif [ -n "$vs4xx" ]; then
         fi
     done
 elif [ -n "$vs3xx" ]; then
-    echo "$vs3xx" | tail -n 1 | while read -r dv3xx
+    echo "$vs3xx" | tail -n 1 | while read -r vr3xx
     do
-        yt-dlp $YTOPT -f $dv3xx -o "$UUIDG.%(ext)s" --write-subs --sub-lang=$sublang $URL
+        yt-dlp $YTOPT -f $vr3xx -o "$UUIDG.%(ext)s" --write-subs --sub-lang=$sublang $URL
 
         cproc="$(echo $?)"
         if [ $cproc -eq "1" ]; then
             until [ $cproc -eq "0" ]
             do
-                yt-dlp $YTOPT -f $dv3xx -o "$UUIDG.%(ext)s" --write-subs --sub-lang=$sublang $URL
+                yt-dlp $YTOPT -f $vr3xx -o "$UUIDG.%(ext)s" --write-subs --sub-lang=$sublang $URL
                 sleep `shuf -i $RANDE -n 1`
                 cproc="$(echo $?)"
             done
