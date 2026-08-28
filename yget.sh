@@ -346,7 +346,7 @@ case ${VR} in
         ;;
     5)
         ### MP3 (Audio only).
-        yt-dlp -x --audio-format mp3 -o "$IDX.mp3" "$URL"
+        yt-dlp -x --audio-format mp3 -o "$IDX - ST.mp3" "$URL"
         ;;
     *)
         echo "Error: Please input 1 = 720p (1280x720), 2 = 480p (854x480), 3 = 360p (640x360), 4 = 240p (384x288), 5 = MP3 (Audio only) from keyboard!"
