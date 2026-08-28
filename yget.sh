@@ -41,7 +41,7 @@ awebmf="$(grep 'audio only' $_tmpfile | grep 'medium, webm_dash' | tail -n1 | aw
 am4af="$(grep 'audio only' $_tmpfile | grep 'medium, m4a_dash' | tail -n1 | awk '{print $1}')"
 
 # Grab video format base on list.
-#vs480p="$(grep 'video only' $_tmpfile | grep -w '480.*, mp4_dash' | awk '{print $1}')"
+vs480p="$(grep 'video only' $_tmpfile | grep -w '480.*, mp4_dash' | awk '{print $1}')"
 vs360p="$(grep 'video only' $_tmpfile | grep -w '360.*, mp4_dash' | awk '{print $1}')"
 vs240p="$(grep 'video only' $_tmpfile | grep -w '240.*, mp4_dash' | awk '{print $1}')"
 
