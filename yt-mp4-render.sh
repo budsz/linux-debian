@@ -60,19 +60,20 @@ do
 
         if [ "$hvfiles" -ge 720 ]; then
             ffmpeg $FFOPT -i "$yfafiles" -i "$yfvfiles" -i "$nologos" \
-                -filter_complex "[1:v]scale=-2:$hvfiles[video]; \
-                                 [2:v]scale=50:-2[logo]; \
-                                 [video][logo]overlay=x=main_w-overlay_w-30:y=25:format=auto,format=yuv420p[outv]" \
+            -filter_complex "[1:v]scale=-2:$hvfiles[video]; \
+                             [2:v]scale=50:-2[logo]; \
+                             [video][logo]overlay=x=main_w-overlay_w-30:y=25:format=auto,format=yuv420p[outv]" \
             -c:a aac -ar 48000 -b:a 192k -map 0:a \
             -map "[outv]" -c:v libx264 -crf 20 \
             -metadata:s handler_name="IT & Sound Dept -- Studio Family Karaoke" \
             -metadata:g encoding_tool="Modified Encoding by eSFK-1.0.5-YT" \
+            #-fflags +bitexact -flags:v +bitexact -flags:a +bitexact \
             $FINSDIR/"$yfofiles".mp4
         elif [ "$hvfiles" -ge 480 ] && [ "$hvfiles" -le 720 ]; then
             ffmpeg $FFOPT -i "$yfafiles" -i "$yfvfiles" -i "$nologos" \
-                -filter_complex "[1:v]scale=-2:$hvfiles[video]; \
-                                 [2:v]scale=40:-2[logo]; \
-                                 [video][logo]overlay=x=main_w-overlay_w-25:y=20:format=auto,format=yuv420p[outv]" \
+            -filter_complex "[1:v]scale=-2:$hvfiles[video]; \
+                             [2:v]scale=40:-2[logo]; \
+                             [video][logo]overlay=x=main_w-overlay_w-25:y=20:format=auto,format=yuv420p[outv]" \
             -c:a aac -ar 48000 -b:a 192k -map 0:a \
             -map "[outv]" -c:v libx264 -crf 20 \
             -metadata:s handler_name="IT & Sound Dept -- Studio Family Karaoke" \
@@ -80,9 +81,9 @@ do
             $FINSDIR/"$yfofiles".mp4
         elif [ "$hvfiles" -ge 360 ] && [ "$hvfiles" -le 480 ]; then
             ffmpeg $FFOPT -i "$yfafiles" -i "$yfvfiles" -i "$nologos" \
-                -filter_complex "[1:v]scale=-2:$hvfiles[video]; \
-                                 [2:v]scale=30:-2[logo]; \
-                                 [video][logo]overlay=x=main_w-overlay_w-20:y=15:format=auto,format=yuv420p[outv]" \
+            -filter_complex "[1:v]scale=-2:$hvfiles[video]; \
+                             [2:v]scale=30:-2[logo]; \
+                             [video][logo]overlay=x=main_w-overlay_w-20:y=15:format=auto,format=yuv420p[outv]" \
             -c:a aac -ar 48000 -b:a 192k -map 0:a \
             -map "[outv]" -c:v libx264 -crf 20 \
             -metadata:s handler_name="IT & Sound Dept -- Studio Family Karaoke" \
@@ -90,9 +91,9 @@ do
             $FINSDIR/"$yfofiles".mp4
         elif [ "$hvfiles" -ge 240 ] && [ "$hvfiles" -le 360 ]; then
             ffmpeg $FFOPT -i "$yfafiles" -i "$yfvfiles" -i "$nologos" \
-                -filter_complex "[1:v]scale=-2:$hvfiles[video]; \
-                                 [2:v]scale=50:-2[logo]; \
-                                 [video][logo]overlay=x=main_w-overlay_w-15:y=10:format=auto,format=yuv420p[outv]" \
+            -filter_complex "[1:v]scale=-2:$hvfiles[video]; \
+                             [2:v]scale=50:-2[logo]; \
+                             [video][logo]overlay=x=main_w-overlay_w-15:y=10:format=auto,format=yuv420p[outv]" \
             -c:a aac -ar 48000 -b:a 192k -map 0:a \
             -map "[outv]" -c:v libx264 -crf 20 \
             -metadata:s handler_name="IT & Sound Dept -- Studio Family Karaoke" \
