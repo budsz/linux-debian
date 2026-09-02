@@ -54,13 +54,13 @@ do
 
         if [ "$wvfiles" -ge 1280 ]; then
             ffmpeg $FFOPT -i "$dfafiles" -i "$difiles" -i "$dfvfiles" -i "$ranlogos" \
-                -filter_complex "[0:a]aformat=channel_layouts=stereo[a0]; \
-                                 [1:a]aformat=channel_layouts=stereo[a1]; \
-                                 [a0][a1]amerge=inputs=2, \
-                                 pan=stereo|c0=c0|c1=c2[audio], \
-                                 [2:v]scale=-2:720[video]; \
-                                 [3:v]scale=50:50[logo]; \
-                                 [video][logo]overlay=x=main_w-overlay_w-35:y=25:format=auto[outv]" \
+            -filter_complex "[0:a]aformat=channel_layouts=stereo[a0]; \
+                             [1:a]aformat=channel_layouts=stereo[a1]; \
+                             [a0][a1]amerge=inputs=2, \
+                             pan=stereo|c0=c0|c1=c2[audio], \
+                             [2:v]scale=-2:720[video]; \
+                             [3:v]scale=50:50[logo]; \
+                             [video][logo]overlay=x=main_w-overlay_w-35:y=25:format=auto[outv]" \
             -c:a aac -ar 48000 -b:a 192k -map "[audio]" \
             -map "[outv]" -c:v libx264 -crf 20 \
             -metadata:s handler_name="IT & Sound Dept -- Studio Family Karaoke" \
@@ -69,13 +69,13 @@ do
             $FINSDIR/"$dfofiles".mp4
         elif [ "$wvfiles" -ge 854 ] && [ "$wvfiles" -lt 1280 ]; then
             ffmpeg $FFOPT -i "$dfafiles" -i "$difiles" -i "$dfvfiles" -i "$ranlogos" \
-                -filter_complex "[0:a]aformat=channel_layouts=stereo[a0]; \
-                                 [1:a]aformat=channel_layouts=stereo[a1]; \
-                                 [a0][a1]amerge=inputs=2, \
-                                 pan=stereo|c0=c0|c1=c2[audio], \
-                                 [2:v]scale=-2:720[video]; \
-                                 [3:v]scale=45:45[logo]; \
-                                 [video][logo]overlay=x=main_w-overlay_w-35:y=25:format=auto[outv]" \
+            -filter_complex "[0:a]aformat=channel_layouts=stereo[a0]; \
+                             [1:a]aformat=channel_layouts=stereo[a1]; \
+                             [a0][a1]amerge=inputs=2, \
+                             pan=stereo|c0=c0|c1=c2[audio], \
+                             [2:v]scale=-2:720[video]; \
+                             [3:v]scale=45:45[logo]; \
+                             [video][logo]overlay=x=main_w-overlay_w-35:y=25:format=auto[outv]" \
             -c:a aac -ar 48000 -b:a 192k -map "[audio]" \
             -map "[outv]" -c:v libx264 -crf 20 \
             -metadata:s handler_name="IT & Sound Dept -- Studio Family Karaoke" \
@@ -84,13 +84,13 @@ do
             $FINSDIR/"$dfofiles".mp4
         elif [ "$wvfiles" -lt 854 ]; then
             ffmpeg $FFOPT -i "$dfafiles" -i "$difiles" -i "$dfvfiles" -i "$ranlogos" \
-                -filter_complex "[0:a]aformat=channel_layouts=stereo[a0]; \
-                                 [1:a]aformat=channel_layouts=stereo[a1]; \
-                                 [a0][a1]amerge=inputs=2, \
-                                 pan=stereo|c0=c0|c1=c2[audio], \
-                                 [2:v]scale=-2:720[video]; \
-                                 [3:v]scale=40:40[logo]; \
-                                 [video][logo]overlay=x=main_w-overlay_w-35:y=25:format=auto[outv]" \
+            -filter_complex "[0:a]aformat=channel_layouts=stereo[a0]; \
+                             [1:a]aformat=channel_layouts=stereo[a1]; \
+                             [a0][a1]amerge=inputs=2, \
+                             pan=stereo|c0=c0|c1=c2[audio], \
+                             [2:v]scale=-2:720[video]; \
+                             [3:v]scale=40:40[logo]; \
+                             [video][logo]overlay=x=main_w-overlay_w-35:y=25:format=auto[outv]" \
             -c:a aac -ar 48000 -b:a 192k -map "[audio]" \
             -map "[outv]" -c:v libx264 -crf 20 \
             -metadata:s handler_name="IT & Sound Dept -- Studio Family Karaoke" \
