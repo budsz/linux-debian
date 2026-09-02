@@ -70,13 +70,13 @@ RENDER() {
 
             # Create *.mpg files.
             ffmpeg $FFOPT -i "$dafiles" -i "$difiles" -i "$dvfiles" -i "$LOGODIR"/$sflogo.png \
-                -filter_complex "[0:a]aformat=channel_layouts=stereo[a0];\
-                                 [1:a]aformat=channel_layouts=stereo[a1];\
-                                 [a0][a1]amerge=inputs=2,\
-                                 pan=stereo|c0=c0|c1=c2[merged_audio],\
-                                 [2:v]scale=$sflist[scaled_video];\
-                                 [3:v]scale=-1:-1[scaled_logo];\
-                                 [scaled_video][scaled_logo]overlay=x=main_w-overlay_w-(main_w*0.02):y=main_h*0.04[outv]" \
+            -filter_complex "[0:a]aformat=channel_layouts=stereo[a0];\
+                             [1:a]aformat=channel_layouts=stereo[a1];\
+                             [a0][a1]amerge=inputs=2,\
+                             pan=stereo|c0=c0|c1=c2[merged_audio],\
+                             [2:v]scale=$sflist[scaled_video];\
+                             [3:v]scale=-1:-1[scaled_logo];\
+                             [scaled_video][scaled_logo]overlay=x=main_w-overlay_w-(main_w*0.02):y=main_h*0.04[outv]" \
             -c:a mp2 -q:a 3 -b:a 320K -ar 48000 -map "[merged_audio]" \
             -map "[outv]" -c:v mpeg2video -q:v $sfqvid -r 25 -b:v 4000k -maxrate 6000k -bufsize 8000k $FINSDIR/"$dofiles".mpg
         else
