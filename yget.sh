@@ -345,11 +345,15 @@ case ${VR} in
         fi
         ;;
     5)
+        ### Default format ID = 18.
+        yt-dlp -f 18 -o "$IDX - ST.mp4" "$URL"
+        ;;
+    6)
         ### MP3 (Audio only).
         yt-dlp -x --audio-format mp3 -o "$IDX - ST.mp3" "$URL"
         ;;
     *)
-        echo "Error: Please input 1 = 720p (1280x720), 2 = 480p (854x480), 3 = 360p (640x360), 4 = 240p (384x288), 5 = MP3 (Audio only) from keyboard!"
+        echo "Error: Please input 1 = 720p (1280x720), 2 = 480p (854x480), 3 = 360p (640x360), 4 = 240p (384x288), 5 = ID=18/360p (640x358), 6 = MP3 (Audio only) from keyboard!"
         exit 1
         ;;
 esac
