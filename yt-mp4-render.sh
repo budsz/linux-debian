@@ -25,7 +25,7 @@ if [ ! -d "$LOGODIR" ]; then
 fi
 
 # Built list base on audio files.
-FL="$(find * -type f -name "y-aud-*")"
+FL="$(find * -type f -name "y-aud-*" | sort -V)"
 if [ -z "$FL" ]; then
     echo "YT Audio files doesn't exists!"
     return 1
