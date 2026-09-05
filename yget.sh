@@ -46,10 +46,10 @@ vs480p="$(grep 'video only' $_tmpfile | grep -w '480.*, mp4_dash' | awk '{print 
 vs360p="$(grep 'video only' $_tmpfile | grep -w '360.*, mp4_dash' | awk '{print $1}')"
 vs240p="$(grep 'video only' $_tmpfile | grep -w '240.*, mp4_dash' | awk '{print $1}')"
 
-vs12xx="$(grep '12[0-9][0-9]x' $_tmpfile | grep -w 'mp4' | grep 'mp4a' | awk '{print $1}')"
-vs8xx="$(grep '8[0-9][0-9]x' $_tmpfile | grep -w 'mp4' | grep 'mp4a' | awk '{print $1}')"
-vs6xx="$(grep '6[0-9][0-9]x' $_tmpfile | grep -w 'mp4' | grep 'mp4a' | awk '{print $1}')"
-vs3xx="$(grep '3[0-9][0-9]x' $_tmpfile | grep -w 'mp4' | grep 'mp4a' | awk '{print $1}')"
+vs12xx="$(grep '12[0-9][0-9]x' $_tmpfile | grep -w 'mp4' | grep 'https' | awk '{print $1}')"
+vs8xx="$(grep '8[0-9][0-9]x' $_tmpfile | grep -w 'mp4' | grep 'https' | awk '{print $1}')"
+vs6xx="$(grep '6[0-9][0-9]x' $_tmpfile | grep -w 'mp4' | grep 'https' | awk '{print $1}')"
+vs4xx="$(grep '4[0-9][0-9]x' $_tmpfile | grep -w 'mp4' | grep 'https' | awk '{print $1}')"
 
 # Audio function.
 GETAUD() {
@@ -171,6 +171,8 @@ case ${VR} in
                     done
                 fi
             done
+        else
+            echo "720p (1280x720) resolution screen size not available!"
         fi
         ;;
     2)
@@ -228,6 +230,8 @@ case ${VR} in
                     done
                 fi
             done
+        else
+            echo "480p (854x480) resolution screen size not available!"
         fi
         ;;
     3)
@@ -285,11 +289,13 @@ case ${VR} in
                     done
                 fi
             done
+        else
+            echo "360p (640x360) resolution screen size not available!"
         fi
         ;;
     4)
-        ### 240p (384x288).
-        if [ -n "$vs240p" -a -z "$vs3xx" ]; then
+        ### 240p (426×240).
+        if [ -n "$vs240p" -a -z "$vs4xx" ]; then
             echo "$vs240p" | tail -n 1 | while read -r vr240p
             do
                 GETAUD
@@ -305,8 +311,8 @@ case ${VR} in
                     done
                 fi
             done
-        elif [ -n "$vs3xx" -a -z "$vs240p" ]; then
-            echo "$vs3xx" | tail -n 1 | while read -r vr3xx
+        elif [ -n "$vs4xx" -a -z "$vs240p" ]; then
+            echo "$vs4xx" | tail -n 1 | while read -r vr3xx
             do
                 yt-dlp $YTOPT -f $vr3xx -o "y-aud+y-vid-$IDX.mp4" "$URL"
                 cproc=$?
@@ -326,7 +332,7 @@ case ${VR} in
                 ffmpeg $FFOPT -i "y-aud+y-vid-$IDX.mp4" -c:v copy -an "y-vid-$IDX.mp4"
                 echo "Creating y-vid-$IDX.mp4 file has been successful."
             done
-        elif [ -n "$vs240p" -a -n "$vs3xx" ]; then
+        elif [ -n "$vs240p" -a -n "$vs4xx" ]; then
             echo "$vs240p" | tail -n 1 | while read -r vr240p
             do
                 GETAUD
@@ -342,6 +348,8 @@ case ${VR} in
                     done
                 fi
             done
+        else
+            echo "240p (384x288) resolution screen size not available!"
         fi
         ;;
     5)

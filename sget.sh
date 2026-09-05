@@ -48,10 +48,10 @@ vs480p="$(grep 'video only' $_tmpfile | grep -w '480.*, mp4_dash' | awk '{print 
 vs360p="$(grep 'video only' $_tmpfile | grep -w '360.*, mp4_dash' | awk '{print $1}')"
 vs240p="$(grep 'video only' $_tmpfile | grep -w '240.*, mp4_dash' | awk '{print $1}')"
 
-vs12xx="$(grep '12[0-9][0-9]x' $_tmpfile | grep -w 'mp4' | grep 'mp4a' | awk '{print $1}')"
-vs8xx="$(grep '8[0-9][0-9]x' $_tmpfile | grep -w 'mp4' | grep 'mp4a' | awk '{print $1}')"
-vs6xx="$(grep '6[0-9][0-9]x' $_tmpfile | grep -w 'mp4' | grep 'mp4a' | awk '{print $1}')"
-vs3xx="$(grep '3[0-9][0-9]x' $_tmpfile | grep -w 'mp4' | grep 'mp4a' | awk '{print $1}')"
+vs12xx="$(grep '12[0-9][0-9]x' $_tmpfile | grep -w 'mp4' | grep 'https' | awk '{print $1}')"
+vs8xx="$(grep '8[0-9][0-9]x' $_tmpfile | grep -w 'mp4' | grep 'https' | awk '{print $1}')"
+vs6xx="$(grep '6[0-9][0-9]x' $_tmpfile | grep -w 'mp4' | grep 'https' | awk '{print $1}')"
+vs4xx="$(grep '4[0-9][0-9]x' $_tmpfile | grep -w 'mp4' | grep 'https' | awk '{print $1}')"
 
 # Audio function.
 GETAUD() {
@@ -281,8 +281,8 @@ elif [ -n "$vs360p" -a -n "$vs6xx" ]; then
         fi
     done
 
-## 240p (384x288).
-elif [ -n "$vs240p" -a -z "$vs3xx" ]; then
+## 240p (426×240).
+elif [ -n "$vs240p" -a -z "$vs4xx" ]; then
     echo "$vs240p" | tail -n 1 | while read -r vr240p
     do
         GETAUD
@@ -299,8 +299,8 @@ elif [ -n "$vs240p" -a -z "$vs3xx" ]; then
             done
         fi
     done
-elif [ -n "$vs3xx" -a -z "$vs240p" ]; then
-    echo "$vs3xx" | tail -n 1 | while read -r vr3xx
+elif [ -n "$vs4xx" -a -z "$vs240p" ]; then
+    echo "$vs4xx" | tail -n 1 | while read -r vr3xx
     do
         yt-dlp $YTOPS -o "d-aud+d-vid-$UUIDG" --write-subs --sub-langs "$sublangs" --skip-download "$URL"
         yt-dlp $YTOPT -f $vr3xx -o "d-aud+d-vid-$UUIDG.mp4" $STOPT "$URL"
@@ -321,7 +321,7 @@ elif [ -n "$vs3xx" -a -z "$vs240p" ]; then
         ffmpeg $FFOPT -i "d-aud+d-vid-$UUIDG.mp4" -c:v copy -an "$UUIDG.mp4"
         echo "Creating $UUIDG.mp4 file has been successful."
     done
-elif [ -n "$vs240p" -a -n "$vs3xx" ]; then
+elif [ -n "$vs240p" -a -n "$vs4xx" ]; then
     echo "$vs240p" | tail -n 1 | while read -r vr240p
     do
         GETAUD
