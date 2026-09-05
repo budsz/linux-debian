@@ -25,7 +25,7 @@ if [ ! -d "$LOGODIR" ]; then
 fi
 
 # Built list base on instrument files.
-IFL="$(find * -type f -name "*_\(Instrumental\).*")"
+IFL="$(find * -type f -name "*_\(Instrumental\).*" | sort -V)"
 if [ -z "$IFL" ]; then
     echo "Instrument files doesn't exists!"
     return 1
