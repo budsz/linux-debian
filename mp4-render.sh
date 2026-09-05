@@ -25,7 +25,7 @@ if [ ! -d "$LOGODIR" ]; then
 fi
 
 # Built list base on instrument files.
-IFL="$(find * -type f -name "*_\(Instrumental\).*")"
+IFL="$(find * -type f -name "*_\(Instrumental\).*" | sort -V)"
 if [ -z "$IFL" ]; then
     echo "Instrument files doesn't exists!"
     return 1
@@ -60,7 +60,7 @@ do
                              pan=stereo|c0=c0|c1=c2[audio], \
                              [2:v]scale=-2:720[video]; \
                              [3:v]scale=50:50[logo]; \
-                             [video][logo]overlay=x=main_w-overlay_w-35:y=25:format=auto[outv]" \
+                             [video][logo]overlay=x=main_w-overlay_w-35:y=25:format=auto,format=yuv420p[outv]" \
             -c:a aac -ar 48000 -b:a 192k -map "[audio]" \
             -map "[outv]" -c:v libx264 -crf 20 \
             -metadata:s handler_name="IT & Sound Dept -- Studio Family Karaoke" \
@@ -75,7 +75,7 @@ do
                              pan=stereo|c0=c0|c1=c2[audio], \
                              [2:v]scale=-2:720[video]; \
                              [3:v]scale=45:45[logo]; \
-                             [video][logo]overlay=x=main_w-overlay_w-35:y=25:format=auto[outv]" \
+                             [video][logo]overlay=x=main_w-overlay_w-35:y=25:format=auto,format=yuv420p[outv]" \
             -c:a aac -ar 48000 -b:a 192k -map "[audio]" \
             -map "[outv]" -c:v libx264 -crf 20 \
             -metadata:s handler_name="IT & Sound Dept -- Studio Family Karaoke" \
@@ -90,7 +90,7 @@ do
                              pan=stereo|c0=c0|c1=c2[audio], \
                              [2:v]scale=-2:720[video]; \
                              [3:v]scale=40:40[logo]; \
-                             [video][logo]overlay=x=main_w-overlay_w-35:y=25:format=auto[outv]" \
+                             [video][logo]overlay=x=main_w-overlay_w-35:y=25:format=auto,format=yuv420p[outv]" \
             -c:a aac -ar 48000 -b:a 192k -map "[audio]" \
             -map "[outv]" -c:v libx264 -crf 20 \
             -metadata:s handler_name="IT & Sound Dept -- Studio Family Karaoke" \
