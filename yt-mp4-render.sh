@@ -38,7 +38,7 @@ do
     yafiles="$(echo $yafiles | sed 's/\[/\\[/g;s/\]/\\]/g')"
 
     ## Get layout SINGER - TITLE format from audio files.
-    yfsfiles="$(echo $yafiles | awk -F ' - ' '{print $1, "-", $2}' | sed 's/\(.*\)y-aud-//')"
+    yfsfiles="$(echo $yafiles | awk -F ' - ' '{print $1, "-", $2}' | sed 's/\(.*\)y-aud-//;s/\.[^.]*$//')"
     yftfiles="$(echo $yafiles | cut -d '-' -f 3,4,5 | sed 's/\.[^.]*$//')"
 
     ## Fixed '\[\]' to '[]' chars.
