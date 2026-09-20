@@ -21,6 +21,7 @@ _tmpfile="/tmp/$(basename $0 .sh)-$RANFN.tmp"
 IDX1="$(echo "$1" | iconv -f UTF-8 -t ASCII//TRANSLIT | CC | awk -F ' - ' '{print $1}')"
 IDX2="$(echo "$1" | iconv -f UTF-8 -t ASCII//TRANSLIT | CC | awk -F ' - ' '{print $2}')"
 IDX3="$(echo "$1" | CC | tr '[:lower:]' '[:upper:]' | awk -F ' - ' '{print $3}')"
+IDX4="$1"
 IDX="$(echo "${IDX1} - ${IDX2} - ${IDX3}" | sed 's/  */ /g')"
 
 URL="$2"
@@ -106,7 +107,7 @@ GETAUD() {
 
 # Download video clip.
 ## First choice menu.
-read -p "Select video resolution            : " VR
+read -p "Select video resolution/YouTube (ID Format video)      : " VR
 
 ## Validation input from user not NULL.
 if [ -z "${VR}" ]; then
@@ -360,8 +361,12 @@ case ${VR} in
         ### MP3 (Audio only).
         yt-dlp -x --audio-format mp3 -o "$IDX - ST.mp3" "$URL"
         ;;
+    7)
+        ### Default format ID = 18 for download YouTube (audio+video).
+        yt-dlp -o "$IDX4" --extractor-args "youtube:player-client=android" "$URL"
+        ;;
     *)
-        echo "Error: Please input 1 = 720p (1280x720), 2 = 480p (854x480), 3 = 360p (640x360), 4 = 240p (384x288), 5 = ID=18/360p (640x358), 6 = MP3 (Audio only) from keyboard!"
+        echo "Error: Please input 1 = 720p (1280x720), 2 = 480p (854x480), 3 = 360p (640x360), 4 = 240p (384x288), 5 = ID=18/360p (640x358) formated, 6 = MP3 (Audio only), 7 = ID=18/360p (640x358) from keyboard!"
         exit 1
         ;;
 esac
