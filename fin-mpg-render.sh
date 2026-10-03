@@ -53,7 +53,7 @@ do
     ## Rendering audio + video + logo.
     if [ -n "$fafiles" ] && [ -n "$fvfiles" ]; then
         ## Checking width video files.
-        wvfiles="$(ffprobe -v error -select_streams v:0 -show_entries stream=width -of csv=p=0 -i "$fvfiles")"
+        wvfiles="$(ffprobe -v error -select_streams v:0 -show_entries stream=width -of default=noprint_wrappers=1:nokey=1 -i "$fvfiles" | grep -Eo '[0-9]+')"
 
         if [ "$wvfiles" -ge 1280 ]; then
             ffmpeg $FFOPT -i "$fafiles" -i "$fvfiles" -i "$ranlogo" \

@@ -50,7 +50,7 @@ do
     #if [ -n "$dfafiles" ] && [ -n "$dfvfiles" ] && [ ! -f $FINSDIR/"$dfofiles".mpg ]; then
     if [ -n "$dfafiles" ] && [ -n "$dfvfiles" ]; then
         ## Checking width video files.
-        wvfiles="$(ffprobe -v error -select_streams v:0 -show_entries stream=width -of csv=p=0 -i "$dfvfiles")"
+        wvfiles="$(ffprobe -v error -select_streams v:0 -show_entries stream=width -of default=noprint_wrappers=1:nokey=1 -i "$dfvfiles" | grep -Eo '[0-9]+')"
 
         if [ "$wvfiles" -ge 1280 ]; then
             ffmpeg $FFOPT -i "$dfafiles" -i "$difiles" -i "$dfvfiles" -i "$ranlogos" \

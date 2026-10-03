@@ -56,7 +56,7 @@ do
     #if [ -n "$yfafiles" ] && [ -n "$yfvfiles" ] && [ ! -f $FINSDIR/"$yfofiles".mpg ]; then
     if [ -n "$yfafiles" ] && [ -n "$yfvfiles" ]; then
         ## Checking width video files.
-        hvfiles="$(ffprobe -v error -select_streams v:0 -show_entries stream=height -of csv=p=0 -i "$yfvfiles")"
+        hvfiles="$(ffprobe -v error -select_streams v:0 -show_entries stream=height -of default=noprint_wrappers=1:nokey=1 -i "$yfvfiles" | grep -Eo '[0-9]+')"
 
         if [ "$hvfiles" -ge 720 ]; then
             ffmpeg $FFOPT -i "$yfafiles" -i "$yfvfiles" -i "$nologos" \
