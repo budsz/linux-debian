@@ -36,8 +36,11 @@ if [ -z "$IFL" ]; then
     return 1
 fi
 
+# Exclude SINGER - TITLE - CAT already have instrument files.
+EKW=$(find * -type f -name "*_(Instrumental)*" | sed -E 's/^.*aud-//; s/_\(Instrumental\)\.wav$//')
+
 # Main process.
-echo "${IFL}" | while read -r fifiles
+echo "${IFL}" | grep -v "$EKW" | while read -r fifiles
 do
     ## Get layout SINGER - TITLE format from instrument files.
     #fafiles="$(echo $fifiles | awk -F ' - ' '{print $1, "-", $2}' | sed 's/\(.*\)f-aud-//')"
