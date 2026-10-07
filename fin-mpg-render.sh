@@ -36,11 +36,17 @@ if [ -z "$IFL" ]; then
     return 1
 fi
 
-# Exclude SINGER - TITLE - CAT already have instrument files.
+# Main process.
+## Exclude SINGER - TITLE - CAT already have instrument files.
 EKW=$(find * -type f -name "*_(Instrumental)*" | sed -E 's/^.*aud-//; s/_\(Instrumental\)\.wav$//')
 
-# Main process.
-echo "${IFL}" | grep -v "$EKW" | while read -r fifiles
+if [ -z "$EKW" ]; then
+    ## If EKW is empty, pass the list directly without grep.
+    echo "$IFL"
+else
+    ## If EKW has content, filter out the excluded lines.
+    echo "$IFL" | grep -v "$EKW"
+fi | while read -r fifiles
 do
     ## Get layout SINGER - TITLE format from instrument files.
     #fafiles="$(echo $fifiles | awk -F ' - ' '{print $1, "-", $2}' | sed 's/\(.*\)f-aud-//')"
