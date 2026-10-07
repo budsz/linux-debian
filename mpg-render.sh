@@ -44,7 +44,22 @@ do
     dfvfiles="$(find * -type f \( -name "d-vid*$dfsfiles*" -or -name "f-vid*$dfsfiles*" \) )"
 
     ## Random logo files.
-    ranlogos="$(find $LOGODIR -maxdepth 1 -type f -name "$LOGONAME-*.svg" | shuf -n 1)"
+    if [ -n "$(echo "$dfafiles" | grep 'f-aud-')" ]; then
+        ranlogos="$(find $LOGODIR -maxdepth 1 -type f -name "fin-*.svg" | shuf -n 1)"
+    else
+        ranlogos="$(find $LOGODIR -maxdepth 1 -type f -name "$LOGONAME-*.svg" | shuf -n 1)"
+    fi
+
+    ## Output directory.
+    if [ -n "$(echo "$dfafiles" | grep 'f-aud-')" ]; then
+        if [ ! -d "$FINSDIR/FIN" ]; then
+            mkdir "$FINSDIR/FIN"
+        fi
+
+        FFINSDIR="$FINSDIR/FIN"
+    else
+        FFINSDIR="$FINSDIR"
+    fi
 
     ## Rendering audio + video + logo.
     #if [ -n "$dfafiles" ] && [ -n "$dfvfiles" ] && [ ! -f $FINSDIR/"$dfofiles".mpg ]; then
@@ -62,7 +77,7 @@ do
                              [3:v]scale=50:50[logo]; \
                              [video][logo]overlay=x=main_w-overlay_w-35:y=25:format=auto[outv]" \
             -c:a mp2 -q:a 3 -b:a 320K -ar 48000 -map "[audio]" \
-            -map "[outv]" -c:v mpeg2video -q:v 12 -r 25 -b:v 4000k -maxrate 6000k -bufsize 8000k $FINSDIR/"$dfofiles".mpg
+            -map "[outv]" -c:v mpeg2video -q:v 12 -r 25 -b:v 4000k -maxrate 6000k -bufsize 8000k $FFINSDIR/"$dfofiles".mpg
         elif [ "$wvfiles" -ge 854 ] && [ "$wvfiles" -lt 1280 ]; then
             ffmpeg $FFOPT -i "$dfafiles" -i "$difiles" -i "$dfvfiles" -i "$ranlogos" \
             -filter_complex "[0:a]aformat=channel_layouts=stereo[a0]; \
@@ -73,7 +88,7 @@ do
                              [3:v]scale=45:45[logo]; \
                              [video][logo]overlay=x=main_w-overlay_w-35:y=25:format=auto[outv]" \
             -c:a mp2 -q:a 3 -b:a 320K -ar 48000 -map "[audio]" \
-            -map "[outv]" -c:v mpeg2video -q:v 12 -r 25 -b:v 4000k -maxrate 6000k -bufsize 8000k $FINSDIR/"$dfofiles".mpg
+            -map "[outv]" -c:v mpeg2video -q:v 12 -r 25 -b:v 4000k -maxrate 6000k -bufsize 8000k $FFINSDIR/"$dfofiles".mpg
         elif [ "$wvfiles" -lt 854 ]; then
             ffmpeg $FFOPT -i "$dfafiles" -i "$difiles" -i "$dfvfiles" -i "$ranlogos" \
             -filter_complex "[0:a]aformat=channel_layouts=stereo[a0]; \
@@ -84,7 +99,7 @@ do
                              [3:v]scale=40:40[logo]; \
                              [video][logo]overlay=x=main_w-overlay_w-35:y=25:format=auto[outv]" \
             -c:a mp2 -q:a 3 -b:a 320K -ar 48000 -map "[audio]" \
-            -map "[outv]" -c:v mpeg2video -q:v 12 -r 25 -b:v 4000k -maxrate 6000k -bufsize 8000k $FINSDIR/"$dfofiles".mpg
+            -map "[outv]" -c:v mpeg2video -q:v 12 -r 25 -b:v 4000k -maxrate 6000k -bufsize 8000k $FFINSDIR/"$dfofiles".mpg
         fi
     else
         echo "$dfsfiles: Audio/video/logo files: NULL -OR- target file already exists."
