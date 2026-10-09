@@ -68,36 +68,30 @@ do
         wvfiles="$(ffprobe -v error -select_streams v:0 -show_entries stream=width -of default=noprint_wrappers=1:nokey=1 -i "$dfvfiles" | grep -Eo '[0-9]+')"
 
         if [ "$wvfiles" -ge 1280 ]; then
-            ffmpeg $FFOPT -i "$dfafiles" -i "$difiles" -i "$dfvfiles" -i "$ranlogos" \
+            ffmpeg $FFOPT -i "$dfafiles" -i "$difiles" -i "$dfvfiles" -width 70 -height 70 -i "$ranlogos" \
             -filter_complex "[0:a]aformat=channel_layouts=stereo[a0]; \
                              [1:a]aformat=channel_layouts=stereo[a1]; \
-                             [a0][a1]amerge=inputs=2, \
-                             pan=stereo|c0=c0|c1=c2[audio], \
+                             [a0][a1]amerge=inputs=2, pan=stereo|c0=c0|c1=c2[audio], \
                              [2:v]scale=-2:720[video]; \
-                             [3:v]scale=50:50[logo]; \
-                             [video][logo]overlay=x=main_w-overlay_w-35:y=25:format=auto[outv]" \
+                             [video]overlay=x=main_w-overlay_w-35:y=25:format=auto[outv]" \
             -c:a mp2 -q:a 3 -b:a 320K -ar 48000 -map "[audio]" \
             -map "[outv]" -c:v mpeg2video -q:v 12 -r 25 -b:v 4000k -maxrate 6000k -bufsize 8000k $FFINSDIR/"$dfofiles".mpg
         elif [ "$wvfiles" -ge 854 ] && [ "$wvfiles" -lt 1280 ]; then
-            ffmpeg $FFOPT -i "$dfafiles" -i "$difiles" -i "$dfvfiles" -i "$ranlogos" \
+            ffmpeg $FFOPT -i "$dfafiles" -i "$difiles" -i "$dfvfiles" -width 60 -height 60 -i "$ranlogos" \
             -filter_complex "[0:a]aformat=channel_layouts=stereo[a0]; \
                              [1:a]aformat=channel_layouts=stereo[a1]; \
-                             [a0][a1]amerge=inputs=2, \
-                             pan=stereo|c0=c0|c1=c2[audio], \
+                             [a0][a1]amerge=inputs=2, pan=stereo|c0=c0|c1=c2[audio], \
                              [2:v]scale=-2:720[video]; \
-                             [3:v]scale=45:45[logo]; \
-                             [video][logo]overlay=x=main_w-overlay_w-35:y=25:format=auto[outv]" \
+                             [video]overlay=x=main_w-overlay_w-35:y=25:format=auto[outv]" \
             -c:a mp2 -q:a 3 -b:a 320K -ar 48000 -map "[audio]" \
             -map "[outv]" -c:v mpeg2video -q:v 12 -r 25 -b:v 4000k -maxrate 6000k -bufsize 8000k $FFINSDIR/"$dfofiles".mpg
         elif [ "$wvfiles" -lt 854 ]; then
-            ffmpeg $FFOPT -i "$dfafiles" -i "$difiles" -i "$dfvfiles" -i "$ranlogos" \
+            ffmpeg $FFOPT -i "$dfafiles" -i "$difiles" -i "$dfvfiles" -width 50 -height 50 -i "$ranlogos" \
             -filter_complex "[0:a]aformat=channel_layouts=stereo[a0]; \
                              [1:a]aformat=channel_layouts=stereo[a1]; \
-                             [a0][a1]amerge=inputs=2, \
-                             pan=stereo|c0=c0|c1=c2[audio], \
+                             [a0][a1]amerge=inputs=2, pan=stereo|c0=c0|c1=c2[audio], \
                              [2:v]scale=-2:720[video]; \
-                             [3:v]scale=40:40[logo]; \
-                             [video][logo]overlay=x=main_w-overlay_w-35:y=25:format=auto[outv]" \
+                             [video]overlay=x=main_w-overlay_w-35:y=25:format=auto[outv]" \
             -c:a mp2 -q:a 3 -b:a 320K -ar 48000 -map "[audio]" \
             -map "[outv]" -c:v mpeg2video -q:v 12 -r 25 -b:v 4000k -maxrate 6000k -bufsize 8000k $FFINSDIR/"$dfofiles".mpg
         fi
