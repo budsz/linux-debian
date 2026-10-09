@@ -351,9 +351,13 @@ vttms="$(ls *$UUIDG.ms*.vtt 2> /dev/null)"
 vttja="$(ls *$UUIDG.ja*.vtt 2> /dev/null)"
 vttst="$(ls st.vtt 2> /dev/null)"
 
+# Ass's substitle style.
+sub_ass_style="subtitles=${UUIDG}.ass:force_style='BorderStyle=3,OutlineColour=&H80000000&,FontSize=24'"
+
 # Burning subtitle to video.
 if [ -f "$UUIDG.mp4" ] && [ -f "$vttid" ]; then
-    ffmpeg $FFOPT -i "$UUIDG.mp4" -vf subtitles="$vttid" "d-vid-$IDX.mp4"
+    ffmpeg $FFOPT -i "$vttid" $UUIDG.ass
+    ffmpeg $FFOPT -i "$UUIDG.mp4" -vf "$sub_ass_style" "d-vid-$IDX.mp4"
 
     # Extract audio from video.
     #ffmpeg $FFOPT -i "sub-d-vid-$IDX.mp4" -map 0:a -b:a 192K "d-aud-$IDX.mp3"
@@ -361,22 +365,28 @@ if [ -f "$UUIDG.mp4" ] && [ -f "$vttid" ]; then
     # Remove all audio from video.
     #ffmpeg $FFOPT -i "sub-d-vid-$IDX.mp4" -c copy -an "vid-noaudio-$IDX.mp4"
 elif [ -f "$UUIDG.mp4" ] && [ -f "$vttjv" ]; then
-    ffmpeg $FFOPT -i "$UUIDG.mp4" -vf subtitles="$vttjv" "d-vid-$IDX.mp4"
+    ffmpeg $FFOPT -i "$vttjv" $UUIDG.ass
+    ffmpeg $FFOPT -i "$UUIDG.mp4" -vf "$sub_ass_style" "d-vid-$IDX.mp4"
     echo "Creating d-vid-$IDX.mp4 file has been successful."
 elif [ -f "$UUIDG.mp4" ] && [ -f "$vtten" ]; then
-    ffmpeg $FFOPT -i "$UUIDG.mp4" -vf subtitles="$vtten" "d-vid-$IDX.mp4"
+    ffmpeg $FFOPT -i "$vtten" $UUIDG.ass
+    ffmpeg $FFOPT -i "$UUIDG.mp4" -vf "$sub_ass_style" "d-vid-$IDX.mp4"
     echo "Creating d-vid-$IDX.mp4 file has been successful."
 elif [ -f "$UUIDG.mp4" ] && [ -f "$vttsu" ]; then
-    ffmpeg $FFOPT -i "$UUIDG.mp4" -vf subtitles="$vttsu" "d-vid-$IDX.mp4"
+    ffmpeg $FFOPT -i "$vttsu" $UUIDG.ass
+    ffmpeg $FFOPT -i "$UUIDG.mp4" -vf "$sub_ass_style" "d-vid-$IDX.mp4"
     echo "Creating d-vid-$IDX.mp4 file has been successful."
 elif [ -f "$UUIDG.mp4" ] && [ -f "$vttms" ]; then
-    ffmpeg $FFOPT -i "$UUIDG.mp4" -vf subtitles="$vttms" "d-vid-$IDX.mp4"
+    ffmpeg $FFOPT -i "$vttms" $UUIDG.ass
+    ffmpeg $FFOPT -i "$UUIDG.mp4" -vf "$sub_ass_style" "d-vid-$IDX.mp4"
     echo "Creating d-vid-$IDX.mp4 file has been successful."
 elif [ -f "$UUIDG.mp4" ] && [ -f "$vttja" ]; then
-    ffmpeg $FFOPT -i "$UUIDG.mp4" -vf subtitles="$vttja" "d-vid-$IDX.mp4"
+    ffmpeg $FFOPT -i "$vttja" $UUIDG.ass
+    ffmpeg $FFOPT -i "$UUIDG.mp4" -vf "$sub_ass_style" "d-vid-$IDX.mp4"
     echo "Creating d-vid-$IDX.mp4 file has been successful."
 elif [ -f "$UUIDG.mp4" ] && [ -f "$vttst" ]; then
-    ffmpeg $FFOPT -i "$UUIDG.mp4" -vf subtitles="$vttst" "d-vid-$IDX.mp4"
+    ffmpeg $FFOPT -i "$vttst" $UUIDG.ass
+    ffmpeg $FFOPT -i "$UUIDG.mp4" -vf "$sub_ass_style" "d-vid-$IDX.mp4"
     echo "Creating d-vid-$IDX.mp4 file has been successful."
 else
     echo "Subtitle files not found!"
