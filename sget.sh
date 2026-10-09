@@ -11,7 +11,7 @@ UUIDG="$(uuidgen)"
 FFOPT="-hide_banner -loglevel error -y"
 RANFN="$(tr -dc '0-9a-z' < /dev/urandom | head -c 7)"
 YTOPT="--no-warnings --force-overwrites -4 --cookies-from-browser firefox:~/.mozilla/firefox/"
-YTOPS="--no-warnings --force-overwrites -4"
+YTOPS="--no-warnings --force-overwrites -4 --cookies-from-browser firefox:~/.mozilla/firefox/"
 _tmpfile="/tmp/$(basename $0 .sh)-$RANFN.tmp"
 
 # Include function.
@@ -352,7 +352,7 @@ vttja="$(ls *$UUIDG.ja*.vtt 2> /dev/null)"
 vttst="$(ls st.vtt 2> /dev/null)"
 
 # Ass's substitle style.
-sub_ass_style="subtitles=${UUIDG}.ass:force_style='BorderStyle=3,OutlineColour=&H80000000&,FontSize=24'"
+sub_ass_style="subtitles=${UUIDG}.ass:force_style='FontName=Anton,FontSize=30,BorderStyle=3,OutlineColour=&H80000000&,Outline=10'"
 
 # Burning subtitle to video.
 if [ -f "$UUIDG.mp4" ] && [ -f "$vttid" ]; then
