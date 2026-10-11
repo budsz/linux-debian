@@ -73,7 +73,7 @@ do
                              [1:a]aformat=channel_layouts=stereo[a1]; \
                              [a0][a1]amerge=inputs=2, pan=stereo|c0=c0|c1=c2[audio], \
                              [2:v]scale=-2:720[video]; \
-                             [video]overlay=x=main_w-overlay_w-35:y=25:format=auto[outv]" \
+                             [video]overlay=x=main_w-overlay_w-40:y=40:format=auto[outv]" \
             -c:a mp2 -q:a 3 -b:a 320K -ar 48000 -map "[audio]" \
             -map "[outv]" -c:v mpeg2video -q:v 12 -r 25 -b:v 4000k -maxrate 6000k -bufsize 8000k $FFINSDIR/"$dfofiles".mpg
         elif [ "$wvfiles" -ge 854 ] && [ "$wvfiles" -lt 1280 ]; then
@@ -82,7 +82,7 @@ do
                              [1:a]aformat=channel_layouts=stereo[a1]; \
                              [a0][a1]amerge=inputs=2, pan=stereo|c0=c0|c1=c2[audio], \
                              [2:v]scale=-2:720[video]; \
-                             [video]overlay=x=main_w-overlay_w-35:y=25:format=auto[outv]" \
+                             [video]overlay=x=main_w-overlay_w-40:y=40:format=auto[outv]" \
             -c:a mp2 -q:a 3 -b:a 320K -ar 48000 -map "[audio]" \
             -map "[outv]" -c:v mpeg2video -q:v 12 -r 25 -b:v 4000k -maxrate 6000k -bufsize 8000k $FFINSDIR/"$dfofiles".mpg
         elif [ "$wvfiles" -lt 854 ]; then
@@ -91,7 +91,7 @@ do
                              [1:a]aformat=channel_layouts=stereo[a1]; \
                              [a0][a1]amerge=inputs=2, pan=stereo|c0=c0|c1=c2[audio], \
                              [2:v]scale=-2:720[video]; \
-                             [video]overlay=x=main_w-overlay_w-35:y=25:format=auto[outv]" \
+                             [video]overlay=x=main_w-overlay_w-40:y=40:format=auto[outv]" \
             -c:a mp2 -q:a 3 -b:a 320K -ar 48000 -map "[audio]" \
             -map "[outv]" -c:v mpeg2video -q:v 12 -r 25 -b:v 4000k -maxrate 6000k -bufsize 8000k $FFINSDIR/"$dfofiles".mpg
         fi

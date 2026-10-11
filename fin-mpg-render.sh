@@ -68,21 +68,21 @@ do
             ffmpeg $FFOPT -i "$fafiles" -i "$fvfiles" -width 70 -height 70 -i "$ranlogo" \
             -filter_complex "[0:a]pan=stereo|c0=c0|c1=c1[audio]; \
                              [1:v]scale=-2:720[video]; \
-                             [video]overlay=x=main_w-overlay_w-35:y=25:format=auto[outv]" \
+                             [video]overlay=x=main_w-overlay_w-40:y=40:format=auto[outv]" \
             -c:a mp2 -q:a 3 -b:a 320K -ar 48000 -map "[audio]" \
             -map "[outv]" -c:v mpeg2video -q:v 12 -r 25 -b:v 4000k -maxrate 6000k -bufsize 8000k $FINSDIR/"$fofiles".mpg
         elif [ "$wvfiles" -ge 854 ] && [ "$wvfiles" -lt 1280 ]; then
             ffmpeg $FFOPT -i "$fafiles" -i "$fvfiles" -width 60 -height 60 -i "$ranlogo" \
             -filter_complex "[0:a]pan=stereo|c0=c0|c1=c1[audio]; \
                              [1:v]scale=-2:720[video]; \
-                             [video]overlay=x=main_w-overlay_w-35:y=25:format=auto[outv]" \
+                             [video]overlay=x=main_w-overlay_w-40:y=40:format=auto[outv]" \
             -c:a mp2 -q:a 3 -b:a 320K -ar 48000 -map "[audio]" \
             -map "[outv]" -c:v mpeg2video -q:v 12 -r 25 -b:v 4000k -maxrate 6000k -bufsize 8000k $FINSDIR/"$fofiles".mpg
         elif [ "$wvfiles" -lt 854 ]; then
             ffmpeg $FFOPT -i "$fafiles" -i "$fvfiles" -width 50 -height 50 -i "$ranlogo" \
             -filter_complex "[0:a]pan=stereo|c0=c0|c1=c1[audio]; \
                              [1:v]scale=-2:720[video]; \
-                             [video]overlay=x=main_w-overlay_w-35:y=25:format=auto[outv]" \
+                             [video]overlay=x=main_w-overlay_w-40:y=40:format=auto[outv]" \
             -c:a mp2 -q:a 3 -b:a 320K -ar 48000 -map "[audio]" \
             -map "[outv]" -c:v mpeg2video -q:v 12 -r 25 -b:v 4000k -maxrate 6000k -bufsize 8000k $FINSDIR/"$fofiles".mpg
         fi

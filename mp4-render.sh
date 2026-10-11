@@ -58,7 +58,7 @@ do
                              [1:a]aformat=channel_layouts=stereo[a1]; \
                              [a0][a1]amerge=inputs=2, pan=stereo|c0=c0|c1=c2[audio], \
                              [2:v]scale=-2:720[video]; \
-                             [video]overlay=x=main_w-overlay_w-35:y=25:format=auto,format=yuv420p[outv]" \
+                             [video]overlay=x=main_w-overlay_w-40:y=40:format=auto,format=yuv420p[outv]" \
             -c:a aac -ar 48000 -b:a 192k -map "[audio]" \
             -map "[outv]" -c:v libx264 -crf 20 \
             -metadata:s handler_name="IT & Sound Dept -- Studio Family Karaoke" \
@@ -71,7 +71,7 @@ do
                              [1:a]aformat=channel_layouts=stereo[a1]; \
                              [a0][a1]amerge=inputs=2, pan=stereo|c0=c0|c1=c2[audio], \
                              [2:v]scale=-2:720[video]; \
-                             [video]overlay=x=main_w-overlay_w-35:y=25:format=auto,format=yuv420p[outv]" \
+                             [video]overlay=x=main_w-overlay_w-40:y=40:format=auto,format=yuv420p[outv]" \
             -c:a aac -ar 48000 -b:a 192k -map "[audio]" \
             -map "[outv]" -c:v libx264 -crf 20 \
             -metadata:s handler_name="IT & Sound Dept -- Studio Family Karaoke" \
@@ -84,7 +84,7 @@ do
                              [1:a]aformat=channel_layouts=stereo[a1]; \
                              [a0][a1]amerge=inputs=2, pan=stereo|c0=c0|c1=c2[audio], \
                              [2:v]scale=-2:720[video]; \
-                             [video]overlay=x=main_w-overlay_w-35:y=25:format=auto,format=yuv420p[outv]" \
+                             [video]overlay=x=main_w-overlay_w-40:y=40:format=auto,format=yuv420p[outv]" \
             -c:a aac -ar 48000 -b:a 192k -map "[audio]" \
             -map "[outv]" -c:v libx264 -crf 20 \
             -metadata:s handler_name="IT & Sound Dept -- Studio Family Karaoke" \
