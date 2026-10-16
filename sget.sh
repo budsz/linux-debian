@@ -352,7 +352,8 @@ vttja="$(ls *$UUIDG.ja*.vtt 2> /dev/null)"
 vttst="$(ls st.vtt 2> /dev/null)"
 
 # Ass's substitle style.
-sub_ass_style="subtitles=${UUIDG}.ass:force_style='FontName=Anton,FontSize=30,BorderStyle=3,OutlineColour=&H80000000&,Outline=10'"
+#sub_ass_style="subtitles=${UUIDG}.ass:force_style='FontName=Anton,FontSize=30,BorderStyle=4,OutlineColour=&H80000000&,Outline=10'"
+sub_ass_style="subtitles=${UUIDG}.ass:force_style='FontName=Anton,FontSize=30,BorderStyle=4,BackColour=&H80000000,Outline=0,Shadow=0"
 
 # Burning subtitle to video.
 if [ -f "$UUIDG.mp4" ] && [ -f "$vttid" ]; then
