@@ -72,31 +72,31 @@ do
             -filter_complex "[0:a]aformat=channel_layouts=stereo[a0]; \
                              [1:a]aformat=channel_layouts=stereo[a1]; \
                              [a0][a1]amerge=inputs=2,pan=stereo|c0=c0|c1=c2[audio]; \
-                             [2:v]scale=-2:720,format=yuv422p[video]; \
-                             [3:v]scale=70:70,format=yuv422p[logo]; \
+                             [2:v]scale=-2:720,format=yuv420p[video]; \
+                             [3:v]scale=70:70,format=yuv420p[logo]; \
                              [video][logo]overlay=x=main_w-overlay_w-40:y=40:format=yuv422[outv]" \
             -c:a mp2 -q:a 3 -b:a 320K -ar 48000 -map "[audio]" \
-            -map "[outv]" -c:v mpeg2video -pix_fmt yuv422p -q:v 6 -r 25 -b:v 5000k -maxrate 7000k -bufsize 8000k $FFINSDIR/"$dfofiles".mpg
+            -map "[outv]" -c:v mpeg2video -pix_fmt yuv420p -q:v 6 -r 25 -b:v 5000k -maxrate 7000k -bufsize 8000k $FFINSDIR/"$dfofiles".mpg
         elif [ "$wvfiles" -ge 854 ] && [ "$wvfiles" -lt 1280 ]; then
             ffmpeg $FFOPT -i "$dfafiles" -i "$difiles" -i "$dfvfiles" -i "$ranlogos" \
             -filter_complex "[0:a]aformat=channel_layouts=stereo[a0]; \
                              [1:a]aformat=channel_layouts=stereo[a1]; \
                              [a0][a1]amerge=inputs=2,pan=stereo|c0=c0|c1=c2[audio]; \
-                             [2:v]scale=-2:720,format=yuv422p[video]; \
-                             [3:v]scale=60:60,format=yuv422p[logo]; \
+                             [2:v]scale=-2:720,format=yuv420p[video]; \
+                             [3:v]scale=60:60,format=yuv420p[logo]; \
                              [video][logo]overlay=x=main_w-overlay_w-40:y=40:format=yuv422[outv]" \
             -c:a mp2 -q:a 3 -b:a 320K -ar 48000 -map "[audio]" \
-            -map "[outv]" -c:v mpeg2video -pix_fmt yuv422p -q:v 6 -r 25 -b:v 5000k -maxrate 7000k -bufsize 8000k $FFINSDIR/"$dfofiles".mpg
+            -map "[outv]" -c:v mpeg2video -pix_fmt yuv420p -q:v 6 -r 25 -b:v 5000k -maxrate 7000k -bufsize 8000k $FFINSDIR/"$dfofiles".mpg
         elif [ "$wvfiles" -lt 854 ]; then
             ffmpeg $FFOPT -i "$dfafiles" -i "$difiles" -i "$dfvfiles" -i "$ranlogos" \
             -filter_complex "[0:a]aformat=channel_layouts=stereo[a0]; \
                              [1:a]aformat=channel_layouts=stereo[a1]; \
                              [a0][a1]amerge=inputs=2,pan=stereo|c0=c0|c1=c2[audio]; \
-                             [2:v]scale=-2:720,format=yuv422p[video]; \
-                             [3:v]scale=50:50,format=yuv422p[logo]; \
+                             [2:v]scale=-2:720,format=yuv420p[video]; \
+                             [3:v]scale=50:50,format=yuv420p[logo]; \
                              [video][logo]overlay=x=main_w-overlay_w-40:y=40:format=yuv422[outv]" \
             -c:a mp2 -q:a 3 -b:a 320K -ar 48000 -map "[audio]" \
-            -map "[outv]" -c:v mpeg2video -pix_fmt yuv422p -q:v 6 -r 25 -b:v 5000k -maxrate 7000k -bufsize 8000k $FFINSDIR/"$dfofiles".mpg
+            -map "[outv]" -c:v mpeg2video -pix_fmt yuv420p -q:v 6 -r 25 -b:v 5000k -maxrate 7000k -bufsize 8000k $FFINSDIR/"$dfofiles".mpg
         fi
     else
         echo "$dfsfiles: Audio/video/logo files: NULL -OR- target file already exists."

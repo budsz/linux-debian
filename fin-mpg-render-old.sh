@@ -29,7 +29,7 @@ if [ ! -d "$LOGODIR" ]; then
     mkdir $LOGODIR
 fi
 
-# Built list base on audi files.
+# Built list base on audio files.
 IFL="$(find * -type f -name "f-aud-*" | sort -V)"
 if [ -z "$IFL" ]; then
     echo "Audio files (f-aud-*) doesn't exists!"
@@ -48,7 +48,7 @@ else
     echo "$IFL" | grep -v "$EKW"
 fi | while read -r fifiles
 do
-    ## Get layout SINGER - TITLE format from instrument files.
+    ## Get layout SINGER - TITLE format from audio files.
     #fafiles="$(echo $fifiles | awk -F ' - ' '{print $1, "-", $2}' | sed 's/\(.*\)f-aud-//')"
     fpfiles="${fifiles#f-aud-}"; fxfiles="${fpfiles%.*}"; fofiles="$(echo $fxfiles - ML)"
 
