@@ -112,7 +112,7 @@ if [ -n "$vs720p" -a -z "$vs12xx" ]; then
     echo "$vs720p" | tail -n 1 | while read -r vr720p
     do
         GETAUD
-        yt-dlp $YTOPS -o "$UUIDG" --write-subs --sub-langs "$sublangs" --skip-download "$URL"
+        yt-dlp $YTOPS -o "$UUIDG" --write-subs --write-auto-subs --sub-langs "$sublangs" --skip-download "$URL"
         yt-dlp $YTOPT -f $vr720p -o "$UUIDG.mp4" "$URL"
         cproc=$?
         if [ "$cproc" -eq 1 ]; then
@@ -128,7 +128,7 @@ if [ -n "$vs720p" -a -z "$vs12xx" ]; then
 elif [ -n "$vs12xx" -a -z "$vs720p" ]; then
     echo "$vs12xx" | tail -n 1 | while read -r vr12xx
     do
-        yt-dlp $YTOPS -o "d-aud+d-vid-$UUIDG" --write-subs --sub-langs "$sublangs" --skip-download "$URL"
+        yt-dlp $YTOPS -o "d-aud+d-vid-$UUIDG" --write-subs --write-auto-subs --sub-langs "$sublangs" --skip-download "$URL"
         yt-dlp $YTOPT -f $vr12xx -o "d-aud+d-vid-$UUIDG.mp4" "$URL"
         cproc=$?
         if [ "$cproc" -eq 1 ]; then
@@ -151,7 +151,7 @@ elif [ -n "$vs720p" -a -n "$vs12xx" ]; then
     echo "$vs720p" | tail -n 1 | while read -r vr720p
     do
         GETAUD
-        yt-dlp $YTOPS -o "$UUIDG" --write-subs --sub-langs "$sublangs" --skip-download "$URL"
+        yt-dlp $YTOPS -o "$UUIDG" --write-subs --write-auto-subs --sub-langs "$sublangs" --skip-download "$URL"
         yt-dlp $YTOPT -f $vr720p -o "$UUIDG.mp4" "$URL"
         cproc=$?
         if [ "$cproc" -eq 1 ]; then
@@ -170,7 +170,7 @@ elif [ -n "$vs480p" -a -z "$vs8xx" ]; then
     echo "$vs480p" | tail -n 1 | while read -r vr480p
     do
         GETAUD
-        yt-dlp $YTOPS -o "$UUIDG" --write-subs --sub-langs "$sublangs" --skip-download "$URL"
+        yt-dlp $YTOPS -o "$UUIDG" --write-subs --write-auto-subs --sub-langs "$sublangs" --skip-download "$URL"
         yt-dlp $YTOPT -f $vr480p -o "$UUIDG.mp4" $STOPT "$URL"
         cproc=$?
         if [ "$cproc" -eq 1 ]; then
@@ -186,7 +186,7 @@ elif [ -n "$vs480p" -a -z "$vs8xx" ]; then
 elif [ -n "$vs8xx" -a -z "$vs480p" ]; then
     echo "$vs8xx" | tail -n 1 | while read -r vr8xx
     do
-        yt-dlp $YTOPS -o "d-aud+d-vid-$UUIDG" --write-subs --sub-langs "$sublangs" --skip-download "$URL"
+        yt-dlp $YTOPS -o "d-aud+d-vid-$UUIDG" --write-subs --write-auto-subs --sub-langs "$sublangs" --skip-download "$URL"
         yt-dlp $YTOPT -f $vr8xx -o "d-aud+d-vid-$UUIDG.mp4" $STOPT "$URL"
         cproc=$?
         if [ "$cproc" -eq 1 ]; then
@@ -209,7 +209,7 @@ elif [ -n "$vs480p" -a -n "$vs8xx" ]; then
     echo "$vs480p" | tail -n 1 | while read -r vr480p
     do
         GETAUD
-        yt-dlp $YTOPS -o "$UUIDG" --write-subs --sub-langs "$sublangs" --skip-download "$URL"
+        yt-dlp $YTOPS -o "$UUIDG" --write-subs --write-auto-subs --sub-langs "$sublangs" --skip-download "$URL"
         yt-dlp $YTOPT -f $vr480p -o "$UUIDG.mp4" $STOPT "$URL"
         cproc=$?
         if [ "$cproc" -eq 1 ]; then
@@ -228,7 +228,7 @@ elif [ -n "$vs360p" -a -z "$vs6xx" ]; then
     echo "$vs360p" | tail -n 1 | while read -r vr360p
     do
         GETAUD
-        yt-dlp $YTOPS -o "$UUIDG" --write-subs --sub-langs "$sublangs" --skip-download "$URL"
+        yt-dlp $YTOPS -o "$UUIDG" --write-subs --write-auto-subs --sub-langs "$sublangs" --skip-download "$URL"
         yt-dlp $YTOPT -f $vr360p -o "$UUIDG.mp4" $STOPT "$URL"
         cproc=$?
         if [ "$cproc" -eq 1 ]; then
@@ -244,7 +244,7 @@ elif [ -n "$vs360p" -a -z "$vs6xx" ]; then
 elif [ -n "$vs6xx" -a -z "$vs360p" ]; then
     echo "$vs6xx" | tail -n 1 | while read -r vr6xx
     do
-        yt-dlp $YTOPS -o "d-aud+d-vid-$UUIDG" --write-subs --sub-langs "$sublangs" --skip-download "$URL"
+        yt-dlp $YTOPS -o "d-aud+d-vid-$UUIDG" --write-subs --write-auto-subs --sub-langs "$sublangs" --skip-download "$URL"
         yt-dlp $YTOPT -f $vr6xx -o "d-aud+d-vid-$UUIDG.mp4" $STOPT "$URL"
         cproc=$?
         if [ "$cproc" -eq 1 ]; then
@@ -267,7 +267,7 @@ elif [ -n "$vs360p" -a -n "$vs6xx" ]; then
     echo "$vs360p" | tail -n 1 | while read -r vr360p
     do
         GETAUD
-        yt-dlp $YTOPS -o "$UUIDG" --write-subs --sub-langs "$sublangs" --skip-download "$URL"
+        yt-dlp $YTOPS -o "$UUIDG" --write-subs --write-auto-subs --sub-langs "$sublangs" --skip-download "$URL"
         yt-dlp $YTOPT -f $vr360p -o "$UUIDG.mp4" $STOPT "$URL"
         cproc=$?
         if [ "$cproc" -eq 1 ]; then
@@ -286,7 +286,7 @@ elif [ -n "$vs240p" -a -z "$vs4xx" ]; then
     echo "$vs240p" | tail -n 1 | while read -r vr240p
     do
         GETAUD
-        yt-dlp $YTOPS -o "$UUIDG" --write-subs --sub-langs "$sublangs" --skip-download "$URL"
+        yt-dlp $YTOPS -o "$UUIDG" --write-subs --write-auto-subs --sub-langs "$sublangs" --skip-download "$URL"
         yt-dlp $YTOPT -f $vr240p -o "$UUIDG.mp4" $STOPT "$URL"
         cproc=$?
         if [ "$cproc" -eq 1 ]; then
@@ -302,7 +302,7 @@ elif [ -n "$vs240p" -a -z "$vs4xx" ]; then
 elif [ -n "$vs4xx" -a -z "$vs240p" ]; then
     echo "$vs4xx" | tail -n 1 | while read -r vr3xx
     do
-        yt-dlp $YTOPS -o "d-aud+d-vid-$UUIDG" --write-subs --sub-langs "$sublangs" --skip-download "$URL"
+        yt-dlp $YTOPS -o "d-aud+d-vid-$UUIDG" --write-subs --write-auto-subs --sub-langs "$sublangs" --skip-download "$URL"
         yt-dlp $YTOPT -f $vr3xx -o "d-aud+d-vid-$UUIDG.mp4" $STOPT "$URL"
         cproc=$?
         if [ "$cproc" -eq 1 ]; then
@@ -325,7 +325,7 @@ elif [ -n "$vs240p" -a -n "$vs4xx" ]; then
     echo "$vs240p" | tail -n 1 | while read -r vr240p
     do
         GETAUD
-        yt-dlp $YTOPS -o "$UUIDG" --write-subs --sub-langs "$sublangs" --skip-download "$URL"
+        yt-dlp $YTOPS -o "$UUIDG" --write-subs --write-auto-subs --sub-langs "$sublangs" --skip-download "$URL"
         yt-dlp $YTOPT -f $vr240p -o "$UUIDG.mp4" $STOPT "$URL"
         cproc=$?
         if [ "$cproc" -eq 1 ]; then
