@@ -1,7 +1,7 @@
 #!/usr/bin/dash
 # IT Support & Development.
 # Copyright (c) 2026, Studio Family Karaoke.
-# aAll rights reserved.
+# All rights reserved.
 #
 
 # Site youtube downloader.
