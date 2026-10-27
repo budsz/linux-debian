@@ -27,6 +27,12 @@ IDX="$(echo "${IDX1} - ${IDX2} - ${IDX3}" | sed 's/  */ /g')"
 URL="$2"
 sublangs="$3"
 
+# Check subtitle args-param ($3).
+if [ -z "$sublangs" ]; then
+    echo "Subtitle cannot be NULL! -- Please use yt-dlp --list-subs [URL]"
+    return 1
+fi
+
 # Move to basedir.
 if [ ! -d "$BASEDIR" ]; then
     mkdir $BASEDIR
