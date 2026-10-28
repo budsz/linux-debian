@@ -21,7 +21,17 @@ _tmpfile="/tmp/$(basename $0 .sh)-$RANFN.tmp"
 IDX1="$(echo "$1" | iconv -f UTF-8 -t ASCII//TRANSLIT | CC | awk -F ' - ' '{print $1}')"
 IDX2="$(echo "$1" | iconv -f UTF-8 -t ASCII//TRANSLIT | CC | awk -F ' - ' '{print $2}')"
 IDX3="$(echo "$1" | CC | tr '[:lower:]' '[:upper:]' | awk -F ' - ' '{print $3}')"
-IDX="$(echo "${IDX1} - ${IDX2} - ${IDX3}" | sed 's/  */ /g')"
+
+# Defined input ML or ML (Default: ML)
+IDX4="$(echo "$1" | tr '[:lower:]' '[:upper:]' | awk -F ' - ' '{print $4}')"
+
+case "$IDX4" in
+    MR) IDX4="MR" ;;
+     *) IDX4="ML" ;;
+esac
+
+# Full filename set.
+IDX="$(echo "${IDX1} - ${IDX2} - ${IDX3} - ${IDX4}" | sed 's/  */ /g')"
 
 URL="$2"
 
