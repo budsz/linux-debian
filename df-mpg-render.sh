@@ -37,7 +37,7 @@ do
     ## Get layout SINGER - TITLE format from instrument files.
     dfsfiles="$(echo $difiles | awk -F ' - ' '{print $1, "-", $2}' | sed 's/\(.*\)d-aud-//;s/\(.*\)f-aud-//')"
     dftfiles="$(echo $difiles | cut -d '-' -f 3,4,5 | sed 's/_(Instrumental).wav//')"
-    dfofiles="$(echo $dftfiles - MR)"
+    dfofiles="$dftfiles - MR"
 
     ## Build list audio/video files except instrument files.
     dfafiles="$(find * -type f \( -name "d-aud*$dfsfiles*" -or -name "f-aud*$dfsfiles*" \) \! -iname "*_(Instrumental)*")"
