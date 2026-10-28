@@ -43,8 +43,8 @@ do
     xpfiles="${xfiles#x-aud-}"; xffiles="${xpfiles%.*}"
 
     ## Build list audio/video files except instrument files.
-    xafiles="$(find * -type f -name "x-aud-*$xxfiles*" \! -iname "*_(Instrumental)*")"
-    xvfiles="$(find * -type f -name "x-vid-*$xxfiles*")"
+    xafiles="$(find * -type f -name "x-aud-*$xffiles*" \! -iname "*_(Instrumental)*")"
+    xvfiles="$(find * -type f -name "x-vid-*$xffiles*")"
 
     ## Random logo files.
     ranlogo="$(find $LOGODIR -maxdepth 1 -type f -name "$LOGONAME-*.svg" | shuf -n 1)"
