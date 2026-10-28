@@ -40,7 +40,14 @@ fi
 echo "${IFL}" | while read -r xfiles
 do
     ## Get layout SINGER - TITLE format from audio files.
-    xpfiles="${xfiles#x-aud-}"; xxfiles="${xpfiles%.*}"; xffiles="$(echo $xxfiles - ML)"
+    xpfiles="${xfiles#x-aud-}"; xxfiles="${xpfiles%.*}"
+
+    ## Defined ML or MR (Default: ML).
+    if [ "$1" = "MR" ]; then
+        xffiles="$(echo $xxfiles - MR)"
+    else
+        xffiles="$(echo $xxfiles - ML)"
+    fi
 
     ## Build list audio/video files except instrument files.
     xafiles="$(find * -type f -name "x-aud-*$xxfiles*" \! -iname "*_(Instrumental)*")"
