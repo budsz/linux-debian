@@ -39,8 +39,8 @@ fi
 # Main process.
 echo "${IFL}" | while read -r xfiles
 do
-    ## Get layout SINGER - TITLE format from audio files.
-    xpfiles="${xfiles#x-aud-}"; xxfiles="${xpfiles%.*}"; xffiles="$xxfiles - ML"
+    ## Get layout SINGER - TITLE - ANALOG format from audio files.
+    xpfiles="${xfiles#x-aud-}"; xffiles="${xpfiles%.*}"
 
     ## Build list audio/video files except instrument files.
     xafiles="$(find * -type f -name "x-aud-*$xxfiles*" \! -iname "*_(Instrumental)*")"
