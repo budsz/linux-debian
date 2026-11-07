@@ -55,27 +55,54 @@ do
         wvfiles="$(ffprobe -v error -select_streams v:0 -show_entries stream=width -of default=noprint_wrappers=1:nokey=1 -i "$xvfiles" | grep -Eo '[0-9]+')"
 
         if [ "$wvfiles" -ge 1280 ]; then
-            ffmpeg $FFOPT -i "$xafiles" -i "$xvfiles" -i "$ranlogo" \
+#            ffmpeg $FFOPT -i "$xafiles" -i "$xvfiles" -i "$ranlogo" \
+#            -filter_complex "[0:a]pan=stereo|c0=c0|c1=c1[audio]; \
+#                             [1:v]scale=-2:720,format=yuv420p[video]; \
+#                             [2:v]scale=70:70,format=rgba[logo]; \
+#                             [video][logo]overlay=x=main_w-overlay_w-40:y=40:format=yuv420[outv]" \
+#            -c:a mp2 -q:a 3 -b:a 320K -ar 48000 -map "[audio]" \
+#            -map "[outv]" -c:v mpeg2video -pix_fmt yuv420p -q:v 6 -r 25 -b:v 4000k -maxrate 6000k -bufsize 8000k $FINSDIR/"$xffiles".mpg
+            ffmpeg $FFOPT -i "$xafiles" -i "$xvfiles" -loop 1 -i "$ranlogo" \
             -filter_complex "[0:a]pan=stereo|c0=c0|c1=c1[audio]; \
                              [1:v]scale=-2:720,format=yuv420p[video]; \
-                             [2:v]scale=70:70,format=rgba[logo]; \
-                             [video][logo]overlay=x=main_w-overlay_w-40:y=40:format=yuv420[outv]" \
+                             [2:v]scale=70:70,format=rgba,split=2[l1][l2]; \
+                             [l2]geq=r=255:g=255:b=255:a='alpha(X,Y)*if(lt(mod(T,4),0.8),exp(-pow((X+Y-mod(T,4)*200)/12,2))*0.8,0)'[shimmer]; \
+                             [l1][shimmer]overlay=0:0[logo_eff]; \
+                             [video][logo_eff]overlay=x=main_w-overlay_w-40:y=40:format=yuv420:shortest=1[outv]" \
             -c:a mp2 -q:a 3 -b:a 320K -ar 48000 -map "[audio]" \
             -map "[outv]" -c:v mpeg2video -pix_fmt yuv420p -q:v 6 -r 25 -b:v 4000k -maxrate 6000k -bufsize 8000k $FINSDIR/"$xffiles".mpg
         elif [ "$wvfiles" -ge 854 ] && [ "$wvfiles" -lt 1280 ]; then
-            ffmpeg $FFOPT -i "$xafiles" -i "$xvfiles" -i "$ranlogo" \
+#            ffmpeg $FFOPT -i "$xafiles" -i "$xvfiles" -i "$ranlogo" \
+#            -filter_complex "[0:a]pan=stereo|c0=c0|c1=c1[audio]; \
+#                             [1:v]scale=-2:720,format=yuv420p[video]; \
+#                             [2:v]scale=60:60,format=rgba[logo]; \
+#                             [video][logo]overlay=x=main_w-overlay_w-40:y=40:format=yuv420[outv]" \
+#            -c:a mp2 -q:a 3 -b:a 320K -ar 48000 -map "[audio]" \
+#            -map "[outv]" -c:v mpeg2video -pix_fmt yuv420p -q:v 6 -r 25 -b:v 4000k -maxrate 6000k -bufsize 8000k $FINSDIR/"$xffiles".mpg
+            ffmpeg $FFOPT -i "$xafiles" -i "$xvfiles" -loop 1 -i "$ranlogo" \
             -filter_complex "[0:a]pan=stereo|c0=c0|c1=c1[audio]; \
                              [1:v]scale=-2:720,format=yuv420p[video]; \
-                             [2:v]scale=60:60,format=rgba[logo]; \
-                             [video][logo]overlay=x=main_w-overlay_w-40:y=40:format=yuv420[outv]" \
+                             [2:v]scale=60:60,format=rgba,split=2[l1][l2]; \
+                             [l2]geq=r=255:g=255:b=255:a='alpha(X,Y)*if(lt(mod(T,4),0.8),exp(-pow((X+Y-mod(T,4)*200)/12,2))*0.8,0)'[shimmer]; \
+                             [l1][shimmer]overlay=0:0[logo_eff]; \
+                             [video][logo_eff]overlay=x=main_w-overlay_w-40:y=40:format=yuv420:shortest=1[outv]" \
             -c:a mp2 -q:a 3 -b:a 320K -ar 48000 -map "[audio]" \
             -map "[outv]" -c:v mpeg2video -pix_fmt yuv420p -q:v 6 -r 25 -b:v 4000k -maxrate 6000k -bufsize 8000k $FINSDIR/"$xffiles".mpg
         elif [ "$wvfiles" -lt 854 ]; then
-            ffmpeg $FFOPT -i "$xafiles" -i "$xvfiles" -i "$ranlogo" \
+#            ffmpeg $FFOPT -i "$xafiles" -i "$xvfiles" -i "$ranlogo" \
+#            -filter_complex "[0:a]pan=stereo|c0=c0|c1=c1[audio]; \
+#                             [1:v]scale=-2:720,format=yuv420p[video]; \
+#                             [2:v]scale=50:50,format=rgba[logo]; \
+#                             [video][logo]overlay=x=main_w-overlay_w-40:y=40:format=yuv420[outv]" \
+#            -c:a mp2 -q:a 3 -b:a 320K -ar 48000 -map "[audio]" \
+#            -map "[outv]" -c:v mpeg2video -pix_fmt yuv420p -q:v 6 -r 25 -b:v 4000k -maxrate 6000k -bufsize 8000k $FINSDIR/"$xffiles".mpg
+            ffmpeg $FFOPT -i "$xafiles" -i "$xvfiles" -loop 1 -i "$ranlogo" \
             -filter_complex "[0:a]pan=stereo|c0=c0|c1=c1[audio]; \
                              [1:v]scale=-2:720,format=yuv420p[video]; \
-                             [2:v]scale=50:50,format=rgba[logo]; \
-                             [video][logo]overlay=x=main_w-overlay_w-40:y=40:format=yuv420[outv]" \
+                             [2:v]scale=50:50,format=rgba,split=2[l1][l2]; \
+                             [l2]geq=r=255:g=255:b=255:a='alpha(X,Y)*if(lt(mod(T,4),0.8),exp(-pow((X+Y-mod(T,4)*200)/12,2))*0.8,0)'[shimmer]; \
+                             [l1][shimmer]overlay=0:0[logo_eff]; \
+                             [video][logo_eff]overlay=x=main_w-overlay_w-40:y=40:format=yuv420:shortest=1[outv]" \
             -c:a mp2 -q:a 3 -b:a 320K -ar 48000 -map "[audio]" \
             -map "[outv]" -c:v mpeg2video -pix_fmt yuv420p -q:v 6 -r 25 -b:v 4000k -maxrate 6000k -bufsize 8000k $FINSDIR/"$xffiles".mpg
         fi
