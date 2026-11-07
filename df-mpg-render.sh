@@ -68,33 +68,64 @@ do
         wvfiles="$(ffprobe -v error -select_streams v:0 -show_entries stream=width -of default=noprint_wrappers=1:nokey=1 -i "$dfvfiles" | grep -Eo '[0-9]+')"
 
         if [ "$wvfiles" -ge 1280 ]; then
-            ffmpeg $FFOPT -i "$dfafiles" -i "$difiles" -i "$dfvfiles" -i "$ranlogos" \
+#            ffmpeg $FFOPT -i "$dfafiles" -i "$difiles" -i "$dfvfiles" -i "$ranlogos" \
+#            -filter_complex "[0:a]aformat=channel_layouts=stereo[a0]; \
+#                             [1:a]aformat=channel_layouts=stereo[a1]; \
+#                             [a0][a1]amerge=inputs=2,pan=stereo|c0=c0|c1=c2[audio]; \
+#                             [2:v]scale=-2:720,format=yuv420p[video]; \
+#                             [3:v]scale=70:70,format=yuv420p[logo]; \
+#                             [video][logo]overlay=x=main_w-overlay_w-40:y=40:format=yuv420[outv]" \
+#            -c:a mp2 -q:a 3 -b:a 320K -ar 48000 -map "[audio]" \
+#            -map "[outv]" -c:v mpeg2video -pix_fmt yuv420p -q:v 6 -r 25 -b:v 5000k -maxrate 7000k -bufsize 8000k $FFINSDIR/"$dfofiles".mpg
+            ffmpeg $FFOPT -i "$dfafiles" -i "$difiles" -i "$dfvfiles" -loop 1 -i "$ranlogos" -f lavfi -i "color=c=white:s=30x150,format=rgba,rotate=45:c=0x00000000:ow=150:oh=150" \
             -filter_complex "[0:a]aformat=channel_layouts=stereo[a0]; \
                              [1:a]aformat=channel_layouts=stereo[a1]; \
                              [a0][a1]amerge=inputs=2,pan=stereo|c0=c0|c1=c2[audio]; \
                              [2:v]scale=-2:720,format=yuv420p[video]; \
-                             [3:v]scale=70:70,format=yuv420p[logo]; \
-                             [video][logo]overlay=x=main_w-overlay_w-40:y=40:format=yuv420[outv]" \
+                             [3:v]format=rgba,scale=70:70[logo_base]; \
+                             [4:v]scale=150:150,gblur=sigma=20[flash_soft]; \
+                             [logo_base][flash_soft]overlay=x='-150+mod(t*100,280)':y=-35:shortest=1,format=rgba[logo_animated]; \
+                             [video][logo_animated]overlay=x=main_w-overlay_w-40:y=40:format=yuv420[outv]" \
             -c:a mp2 -q:a 3 -b:a 320K -ar 48000 -map "[audio]" \
             -map "[outv]" -c:v mpeg2video -pix_fmt yuv420p -q:v 6 -r 25 -b:v 5000k -maxrate 7000k -bufsize 8000k $FFINSDIR/"$dfofiles".mpg
         elif [ "$wvfiles" -ge 854 ] && [ "$wvfiles" -lt 1280 ]; then
-            ffmpeg $FFOPT -i "$dfafiles" -i "$difiles" -i "$dfvfiles" -i "$ranlogos" \
+#            ffmpeg $FFOPT -i "$dfafiles" -i "$difiles" -i "$dfvfiles" -i "$ranlogos" \
+#            -filter_complex "[0:a]aformat=channel_layouts=stereo[a0]; \
+#                             [1:a]aformat=channel_layouts=stereo[a1]; \
+#                             [a0][a1]amerge=inputs=2,pan=stereo|c0=c0|c1=c2[audio]; \
+#                             [2:v]scale=-2:720,format=yuv420p[video]; \
+#                             [3:v]scale=60:60,format=yuv420p[logo]; \
+#                             [video][logo]overlay=x=main_w-overlay_w-40:y=40:format=yuv420[outv]" \
+#            -c:a mp2 -q:a 3 -b:a 320K -ar 48000 -map "[audio]" \
+#            -map "[outv]" -c:v mpeg2video -pix_fmt yuv420p -q:v 6 -r 25 -b:v 5000k -maxrate 7000k -bufsize 8000k $FFINSDIR/"$dfofiles".mpg
             -filter_complex "[0:a]aformat=channel_layouts=stereo[a0]; \
                              [1:a]aformat=channel_layouts=stereo[a1]; \
                              [a0][a1]amerge=inputs=2,pan=stereo|c0=c0|c1=c2[audio]; \
                              [2:v]scale=-2:720,format=yuv420p[video]; \
-                             [3:v]scale=60:60,format=yuv420p[logo]; \
-                             [video][logo]overlay=x=main_w-overlay_w-40:y=40:format=yuv420[outv]" \
+                             [3:v]format=rgba,scale=60:60[logo_base]; \
+                             [4:v]scale=150:150,gblur=sigma=20[flash_soft]; \
+                             [logo_base][flash_soft]overlay=x='-150+mod(t*100,280)':y=-35:shortest=1,format=rgba[logo_animated]; \
+                             [video][logo_animated]overlay=x=main_w-overlay_w-40:y=40:format=yuv420[outv]" \
             -c:a mp2 -q:a 3 -b:a 320K -ar 48000 -map "[audio]" \
             -map "[outv]" -c:v mpeg2video -pix_fmt yuv420p -q:v 6 -r 25 -b:v 5000k -maxrate 7000k -bufsize 8000k $FFINSDIR/"$dfofiles".mpg
         elif [ "$wvfiles" -lt 854 ]; then
-            ffmpeg $FFOPT -i "$dfafiles" -i "$difiles" -i "$dfvfiles" -i "$ranlogos" \
+#            ffmpeg $FFOPT -i "$dfafiles" -i "$difiles" -i "$dfvfiles" -i "$ranlogos" \
+#            -filter_complex "[0:a]aformat=channel_layouts=stereo[a0]; \
+#                             [1:a]aformat=channel_layouts=stereo[a1]; \
+#                             [a0][a1]amerge=inputs=2,pan=stereo|c0=c0|c1=c2[audio]; \
+#                             [2:v]scale=-2:720,format=yuv420p[video]; \
+#                             [3:v]scale=50:50,format=yuv420p[logo]; \
+#                             [video][logo]overlay=x=main_w-overlay_w-40:y=40:format=yuv420[outv]" \
+#            -c:a mp2 -q:a 3 -b:a 320K -ar 48000 -map "[audio]" \
+#            -map "[outv]" -c:v mpeg2video -pix_fmt yuv420p -q:v 6 -r 25 -b:v 5000k -maxrate 7000k -bufsize 8000k $FFINSDIR/"$dfofiles".mpg
             -filter_complex "[0:a]aformat=channel_layouts=stereo[a0]; \
                              [1:a]aformat=channel_layouts=stereo[a1]; \
                              [a0][a1]amerge=inputs=2,pan=stereo|c0=c0|c1=c2[audio]; \
                              [2:v]scale=-2:720,format=yuv420p[video]; \
-                             [3:v]scale=50:50,format=yuv420p[logo]; \
-                             [video][logo]overlay=x=main_w-overlay_w-40:y=40:format=yuv420[outv]" \
+                             [3:v]format=rgba,scale=50:50[logo_base]; \
+                             [4:v]scale=150:150,gblur=sigma=20[flash_soft]; \
+                             [logo_base][flash_soft]overlay=x='-150+mod(t*100,280)':y=-35:shortest=1,format=rgba[logo_animated]; \
+                             [video][logo_animated]overlay=x=main_w-overlay_w-40:y=40:format=yuv420[outv]" \
             -c:a mp2 -q:a 3 -b:a 320K -ar 48000 -map "[audio]" \
             -map "[outv]" -c:v mpeg2video -pix_fmt yuv420p -q:v 6 -r 25 -b:v 5000k -maxrate 7000k -bufsize 8000k $FFINSDIR/"$dfofiles".mpg
         fi
