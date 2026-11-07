@@ -58,7 +58,7 @@ do
             ffmpeg $FFOPT -i "$xafiles" -i "$xvfiles" -i "$ranlogo" \
             -filter_complex "[0:a]pan=stereo|c0=c0|c1=c1[audio]; \
                              [1:v]scale=-2:720,format=yuv420p[video]; \
-                             [2:v]scale=70:70,format=yuv420p[logo]; \
+                             [2:v]scale=70:70,format=rgba[logo]; \
                              [video][logo]overlay=x=main_w-overlay_w-40:y=40:format=yuv420[outv]" \
             -c:a mp2 -q:a 3 -b:a 320K -ar 48000 -map "[audio]" \
             -map "[outv]" -c:v mpeg2video -pix_fmt yuv420p -q:v 6 -r 25 -b:v 4000k -maxrate 6000k -bufsize 8000k $FINSDIR/"$xffiles".mpg
@@ -66,7 +66,7 @@ do
             ffmpeg $FFOPT -i "$xafiles" -i "$xvfiles" -i "$ranlogo" \
             -filter_complex "[0:a]pan=stereo|c0=c0|c1=c1[audio]; \
                              [1:v]scale=-2:720,format=yuv420p[video]; \
-                             [2:v]scale=60:60,format=yuv420p[logo]; \
+                             [2:v]scale=60:60,format=rgba[logo]; \
                              [video][logo]overlay=x=main_w-overlay_w-40:y=40:format=yuv420[outv]" \
             -c:a mp2 -q:a 3 -b:a 320K -ar 48000 -map "[audio]" \
             -map "[outv]" -c:v mpeg2video -pix_fmt yuv420p -q:v 6 -r 25 -b:v 4000k -maxrate 6000k -bufsize 8000k $FINSDIR/"$xffiles".mpg
@@ -74,7 +74,7 @@ do
             ffmpeg $FFOPT -i "$xafiles" -i "$xvfiles" -i "$ranlogo" \
             -filter_complex "[0:a]pan=stereo|c0=c0|c1=c1[audio]; \
                              [1:v]scale=-2:720,format=yuv420p[video]; \
-                             [2:v]scale=50:50,format=yuv420p[logo]; \
+                             [2:v]scale=50:50,format=rgba[logo]; \
                              [video][logo]overlay=x=main_w-overlay_w-40:y=40:format=yuv420[outv]" \
             -c:a mp2 -q:a 3 -b:a 320K -ar 48000 -map "[audio]" \
             -map "[outv]" -c:v mpeg2video -pix_fmt yuv420p -q:v 6 -r 25 -b:v 4000k -maxrate 6000k -bufsize 8000k $FINSDIR/"$xffiles".mpg
