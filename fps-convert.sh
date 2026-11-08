@@ -6,6 +6,7 @@
 
 WORKDIR="M-ONE"
 BASEDIR="/home/`whoami`/$WORKDIR"
+FFBIN="/usr/local/$FFBIN/bin/ffmpeg"
 FFOPT="-hide_banner -nostdin -y"
 
 # CD current work directory.
@@ -31,7 +32,7 @@ if [ -f "$_FILES" ]; then
             _FPS="$(echo $_RFR | cut -d / -f1)"
             _TMPFILE="/tmp/$(uuidgen).mpg"
 
-            ffmpeg $FFOPT -i "$FILES" -filter:v fps=fps=$_FPS "$_TMPFILE"
+            $FFBIN $FFOPT -i "$FILES" -filter:v fps=fps=$_FPS "$_TMPFILE"
             mv -f "$_TMPFILE" "$FILES"
             echo " "
         else

@@ -8,6 +8,7 @@ WORKDIR="M-ONE"
 #WORKDIR="TMP"
 BASEDIR="/home/`whoami`/$WORKDIR"
 UUIDG="$(uuidgen)"
+FFBIN="/usr/local/ffmpeg/bin/ffmpeg"
 FFOPT="-hide_banner -loglevel error -y"
 RANFN="$(tr -dc '0-9a-z' < /dev/urandom | head -c 7)"
 YTOPT="--no-warnings --force-overwrites -4 --cookies-from-browser firefox:~/.mozilla/firefox/"
@@ -147,10 +148,10 @@ elif [ -n "$vs12xx" -a -z "$vs720p" ]; then
             done
         fi
 
-        ffmpeg $FFOPT -i "d-aud+d-vid-$UUIDG.mp4" -vn -acodec copy "d-aud-$IDX.m4a"
+        $FFBIN $FFOPT -i "d-aud+d-vid-$UUIDG.mp4" -vn -acodec copy "d-aud-$IDX.m4a"
         echo "Creating d-aud-$IDX.m4a file has been successful."
 
-        ffmpeg $FFOPT -i "d-aud+d-vid-$UUIDG.mp4" -c:v copy -an "$UUIDG.mp4"
+        $FFBIN $FFOPT -i "d-aud+d-vid-$UUIDG.mp4" -c:v copy -an "$UUIDG.mp4"
         echo "Creating $UUIDG.mp4 file has been successful."
     done
 elif [ -n "$vs720p" -a -n "$vs12xx" ]; then
@@ -205,10 +206,10 @@ elif [ -n "$vs8xx" -a -z "$vs480p" ]; then
             done
         fi
 
-        ffmpeg $FFOPT -i "d-aud+d-vid-$UUIDG.mp4" -vn -acodec copy "d-aud-$IDX.m4a"
+        $FFBIN $FFOPT -i "d-aud+d-vid-$UUIDG.mp4" -vn -acodec copy "d-aud-$IDX.m4a"
         echo "Creating d-aud-$IDX.m4a file has been successful."
 
-        ffmpeg $FFOPT -i "d-aud+d-vid-$UUIDG.mp4" -c:v copy -an "$UUIDG.mp4"
+        $FFBIN $FFOPT -i "d-aud+d-vid-$UUIDG.mp4" -c:v copy -an "$UUIDG.mp4"
         echo "Creating $UUIDG.mp4 file has been successful."
     done
 elif [ -n "$vs480p" -a -n "$vs8xx" ]; then
@@ -263,10 +264,10 @@ elif [ -n "$vs6xx" -a -z "$vs360p" ]; then
             done
         fi
 
-        ffmpeg $FFOPT -i "d-aud+d-vid-$UUIDG.mp4" -vn -acodec copy "d-aud-$IDX.m4a"
+        $FFBIN $FFOPT -i "d-aud+d-vid-$UUIDG.mp4" -vn -acodec copy "d-aud-$IDX.m4a"
         echo "Creating d-aud-$IDX.m4a file has been successful."
 
-        ffmpeg $FFOPT -i "d-aud+d-vid-$UUIDG.mp4" -c:v copy -an "$UUIDG.mp4"
+        $FFBIN $FFOPT -i "d-aud+d-vid-$UUIDG.mp4" -c:v copy -an "$UUIDG.mp4"
         echo "Creating $UUIDG.mp4 file has been successful."
     done
 elif [ -n "$vs360p" -a -n "$vs6xx" ]; then
@@ -321,10 +322,10 @@ elif [ -n "$vs4xx" -a -z "$vs240p" ]; then
             done
         fi
 
-        ffmpeg $FFOPT -i "d-aud+d-vid-$UUIDG.mp4" -vn -acodec copy "d-aud-$IDX.m4a"
+        $FFBIN $FFOPT -i "d-aud+d-vid-$UUIDG.mp4" -vn -acodec copy "d-aud-$IDX.m4a"
         echo "Creating d-aud-$IDX.m4a file has been successful."
 
-        ffmpeg $FFOPT -i "d-aud+d-vid-$UUIDG.mp4" -c:v copy -an "$UUIDG.mp4"
+        $FFBIN $FFOPT -i "d-aud+d-vid-$UUIDG.mp4" -c:v copy -an "$UUIDG.mp4"
         echo "Creating $UUIDG.mp4 file has been successful."
     done
 elif [ -n "$vs240p" -a -n "$vs4xx" ]; then
@@ -363,37 +364,37 @@ sub_ass_style="subtitles=${UUIDG}.ass:force_style='FontName=Anton,FontSize=30,Bo
 
 # Burning subtitle to video.
 if [ -f "$UUIDG.mp4" ] && [ -f "$vttid" ]; then
-    ffmpeg $FFOPT -i "$vttid" $UUIDG.ass
-    ffmpeg $FFOPT -i "$UUIDG.mp4" -vf "$sub_ass_style" "d-vid-$IDX.mp4"
+    $FFBIN $FFOPT -i "$vttid" $UUIDG.ass
+    $FFBIN $FFOPT -i "$UUIDG.mp4" -vf "$sub_ass_style" "d-vid-$IDX.mp4"
 
     # Extract audio from video.
-    #ffmpeg $FFOPT -i "sub-d-vid-$IDX.mp4" -map 0:a -b:a 192K "d-aud-$IDX.mp3"
+    #$FFBIN $FFOPT -i "sub-d-vid-$IDX.mp4" -map 0:a -b:a 192K "d-aud-$IDX.mp3"
 
     # Remove all audio from video.
-    #ffmpeg $FFOPT -i "sub-d-vid-$IDX.mp4" -c copy -an "vid-noaudio-$IDX.mp4"
+    #$FFBIN $FFOPT -i "sub-d-vid-$IDX.mp4" -c copy -an "vid-noaudio-$IDX.mp4"
 elif [ -f "$UUIDG.mp4" ] && [ -f "$vttjv" ]; then
-    ffmpeg $FFOPT -i "$vttjv" $UUIDG.ass
-    ffmpeg $FFOPT -i "$UUIDG.mp4" -vf "$sub_ass_style" "d-vid-$IDX.mp4"
+    $FFBIN $FFOPT -i "$vttjv" $UUIDG.ass
+    $FFBIN $FFOPT -i "$UUIDG.mp4" -vf "$sub_ass_style" "d-vid-$IDX.mp4"
     echo "Creating d-vid-$IDX.mp4 file has been successful."
 elif [ -f "$UUIDG.mp4" ] && [ -f "$vtten" ]; then
-    ffmpeg $FFOPT -i "$vtten" $UUIDG.ass
-    ffmpeg $FFOPT -i "$UUIDG.mp4" -vf "$sub_ass_style" "d-vid-$IDX.mp4"
+    $FFBIN $FFOPT -i "$vtten" $UUIDG.ass
+    $FFBIN $FFOPT -i "$UUIDG.mp4" -vf "$sub_ass_style" "d-vid-$IDX.mp4"
     echo "Creating d-vid-$IDX.mp4 file has been successful."
 elif [ -f "$UUIDG.mp4" ] && [ -f "$vttsu" ]; then
-    ffmpeg $FFOPT -i "$vttsu" $UUIDG.ass
-    ffmpeg $FFOPT -i "$UUIDG.mp4" -vf "$sub_ass_style" "d-vid-$IDX.mp4"
+    $FFBIN $FFOPT -i "$vttsu" $UUIDG.ass
+    $FFBIN $FFOPT -i "$UUIDG.mp4" -vf "$sub_ass_style" "d-vid-$IDX.mp4"
     echo "Creating d-vid-$IDX.mp4 file has been successful."
 elif [ -f "$UUIDG.mp4" ] && [ -f "$vttms" ]; then
-    ffmpeg $FFOPT -i "$vttms" $UUIDG.ass
-    ffmpeg $FFOPT -i "$UUIDG.mp4" -vf "$sub_ass_style" "d-vid-$IDX.mp4"
+    $FFBIN $FFOPT -i "$vttms" $UUIDG.ass
+    $FFBIN $FFOPT -i "$UUIDG.mp4" -vf "$sub_ass_style" "d-vid-$IDX.mp4"
     echo "Creating d-vid-$IDX.mp4 file has been successful."
 elif [ -f "$UUIDG.mp4" ] && [ -f "$vttja" ]; then
-    ffmpeg $FFOPT -i "$vttja" $UUIDG.ass
-    ffmpeg $FFOPT -i "$UUIDG.mp4" -vf "$sub_ass_style" "d-vid-$IDX.mp4"
+    $FFBIN $FFOPT -i "$vttja" $UUIDG.ass
+    $FFBIN $FFOPT -i "$UUIDG.mp4" -vf "$sub_ass_style" "d-vid-$IDX.mp4"
     echo "Creating d-vid-$IDX.mp4 file has been successful."
 elif [ -f "$UUIDG.mp4" ] && [ -f "$vttst" ]; then
-    ffmpeg $FFOPT -i "$vttst" $UUIDG.ass
-    ffmpeg $FFOPT -i "$UUIDG.mp4" -vf "$sub_ass_style" "d-vid-$IDX.mp4"
+    $FFBIN $FFOPT -i "$vttst" $UUIDG.ass
+    $FFBIN $FFOPT -i "$UUIDG.mp4" -vf "$sub_ass_style" "d-vid-$IDX.mp4"
     echo "Creating d-vid-$IDX.mp4 file has been successful."
 else
     echo "Subtitle files not found!"

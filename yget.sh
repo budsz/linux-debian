@@ -7,6 +7,7 @@
 WORKDIR="M-ONE"
 #WORKDIR="TMP"
 BASEDIR="/home/`whoami`/$WORKDIR"
+FFBIN="/usr/local/ffmpeg/bin/ffmpeg"
 FFOPT="-hide_banner -loglevel error -y"
 RANFN="$(tr -dc '0-9a-z' < /dev/urandom | head -c 7)"
 YTOPT="--no-warnings --force-overwrites -4 --cookies-from-browser firefox:~/.mozilla/firefox/"
@@ -150,10 +151,10 @@ case ${VR} in
                     done
                 fi
 
-                ffmpeg $FFOPT -i "y-aud+y-vid-$IDX.mp4" -vn -acodec copy "y-aud-$IDX.m4a"
+                $FFBIN $FFOPT -i "y-aud+y-vid-$IDX.mp4" -vn -acodec copy "y-aud-$IDX.m4a"
                 echo "Creating y-aud-$IDX.m4a file has been successful."
 
-                ffmpeg $FFOPT -i "y-aud+y-vid-$IDX.mp4" -c:v copy -an "y-vid-$IDX.mp4"
+                $FFBIN $FFOPT -i "y-aud+y-vid-$IDX.mp4" -c:v copy -an "y-vid-$IDX.mp4"
                 echo "Creating y-vid-$IDX.mp4 file has been successful."
             done
         elif [ -n "$vs720p" -a -n "$vs12xx" ]; then
@@ -209,10 +210,10 @@ case ${VR} in
                     done
                 fi
 
-                ffmpeg $FFOPT -i "y-aud+y-vid-$IDX.mp4" -vn -acodec copy "y-aud-$IDX.m4a"
+                $FFBIN $FFOPT -i "y-aud+y-vid-$IDX.mp4" -vn -acodec copy "y-aud-$IDX.m4a"
                 echo "Creating y-aud-$IDX.m4a file has been successful."
 
-                ffmpeg $FFOPT -i "y-aud+y-vid-$IDX.mp4" -c:v copy -an "y-vid-$IDX.mp4"
+                $FFBIN $FFOPT -i "y-aud+y-vid-$IDX.mp4" -c:v copy -an "y-vid-$IDX.mp4"
                 echo "Creating y-vid-$IDX.mp4 file has been successful."
             done
         elif [ -n "$vs480p" -a -n "$vs8xx" ]; then
@@ -268,10 +269,10 @@ case ${VR} in
                     done
                 fi
 
-                ffmpeg $FFOPT -i "y-aud+y-vid-$IDX.mp4" -vn -acodec copy "y-aud-$IDX.m4a"
+                $FFBIN $FFOPT -i "y-aud+y-vid-$IDX.mp4" -vn -acodec copy "y-aud-$IDX.m4a"
                 echo "Creating y-aud-$IDX.m4a file has been successful."
 
-                ffmpeg $FFOPT -i "y-aud+y-vid-$IDX.mp4" -c:v copy -an "y-vid-$IDX.mp4"
+                $FFBIN $FFOPT -i "y-aud+y-vid-$IDX.mp4" -c:v copy -an "y-vid-$IDX.mp4"
                 echo "Creating y-vid-$IDX.mp4 file has been successful."
             done
         elif [ -n "$vs360p" -a -n "$vs6xx" ]; then
@@ -327,10 +328,10 @@ case ${VR} in
                     done
                 fi
 
-                ffmpeg $FFOPT -i "y-aud+y-vid-$IDX.mp4" -vn -acodec copy "y-aud-$IDX.m4a"
+                $FFBIN $FFOPT -i "y-aud+y-vid-$IDX.mp4" -vn -acodec copy "y-aud-$IDX.m4a"
                 echo "Creating y-aud-$IDX.m4a file has been successful."
 
-                ffmpeg $FFOPT -i "y-aud+y-vid-$IDX.mp4" -c:v copy -an "y-vid-$IDX.mp4"
+                $FFBIN $FFOPT -i "y-aud+y-vid-$IDX.mp4" -c:v copy -an "y-vid-$IDX.mp4"
                 echo "Creating y-vid-$IDX.mp4 file has been successful."
             done
         elif [ -n "$vs240p" -a -n "$vs4xx" ]; then

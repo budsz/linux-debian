@@ -9,6 +9,7 @@ BASEDIR="/home/`whoami`/$WORKDIR"
 FINSDIR="$BASEDIR/Finished"
 LOGODIR="$BASEDIR/logos"
 LOGONAME="yt"
+FFBIN="/usr/local/ffmpeg/bin/ffmpeg"
 FFOPT="-hide_banner -nostdin -y"
 
 # Move to basedir.
@@ -59,7 +60,7 @@ do
         hvfiles="$(ffprobe -v error -select_streams v:0 -show_entries stream=height -of default=noprint_wrappers=1:nokey=1 -i "$yfvfiles" | grep -Eo '[0-9]+')"
 
         if [ "$hvfiles" -ge 720 ]; then
-            ffmpeg $FFOPT -i "$yfafiles" -i "$yfvfiles" -i "$nologos" \
+            $FFBIN $FFOPT -i "$yfafiles" -i "$yfvfiles" -i "$nologos" \
             -filter_complex "[1:v]scale=-2:$hvfiles[video]; \
                              [2:v]scale=50:-2[logo]; \
                              [video][logo]overlay=x=main_w-overlay_w-30:y=25:format=auto,format=yuv420p[outv]" \
@@ -70,7 +71,7 @@ do
             #-fflags +bitexact -flags:v +bitexact -flags:a +bitexact \
             $FINSDIR/"$yfofiles".mp4
         elif [ "$hvfiles" -ge 480 ] && [ "$hvfiles" -le 720 ]; then
-            ffmpeg $FFOPT -i "$yfafiles" -i "$yfvfiles" -i "$nologos" \
+            $FFBIN $FFOPT -i "$yfafiles" -i "$yfvfiles" -i "$nologos" \
             -filter_complex "[1:v]scale=-2:$hvfiles[video]; \
                              [2:v]scale=40:-2[logo]; \
                              [video][logo]overlay=x=main_w-overlay_w-25:y=20:format=auto,format=yuv420p[outv]" \
@@ -80,7 +81,7 @@ do
             -metadata:g encoding_tool="Modified Encoding by eSFK-1.0.5-YT" \
             $FINSDIR/"$yfofiles".mp4
         elif [ "$hvfiles" -ge 360 ] && [ "$hvfiles" -le 480 ]; then
-            ffmpeg $FFOPT -i "$yfafiles" -i "$yfvfiles" -i "$nologos" \
+            $FFBIN $FFOPT -i "$yfafiles" -i "$yfvfiles" -i "$nologos" \
             -filter_complex "[1:v]scale=-2:$hvfiles[video]; \
                              [2:v]scale=30:-2[logo]; \
                              [video][logo]overlay=x=main_w-overlay_w-20:y=15:format=auto,format=yuv420p[outv]" \
@@ -90,7 +91,7 @@ do
             -metadata:g encoding_tool="Modified Encoding by eSFK-1.0.5-YT" \
             $FINSDIR/"$yfofiles".mp4
         elif [ "$hvfiles" -ge 240 ] && [ "$hvfiles" -le 360 ]; then
-            ffmpeg $FFOPT -i "$yfafiles" -i "$yfvfiles" -i "$nologos" \
+            $FFBIN $FFOPT -i "$yfafiles" -i "$yfvfiles" -i "$nologos" \
             -filter_complex "[1:v]scale=-2:$hvfiles[video]; \
                              [2:v]scale=50:-2[logo]; \
                              [video][logo]overlay=x=main_w-overlay_w-15:y=10:format=auto,format=yuv420p[outv]" \

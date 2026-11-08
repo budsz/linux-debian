@@ -7,6 +7,7 @@
 WORKDIR="M-ONE"
 #WORKDIR="TMP"
 BASEDIR="/home/`whoami`/$WORKDIR"
+FFBIN="/usr/local/ffmpeg/bin/ffmpeg"
 FFOPT="-hide_banner -loglevel error -y"
 RANFN="$(tr -dc '0-9a-z' < /dev/urandom | head -c 7)"
 YTOPT="--no-warnings --force-overwrites -4 --cookies-from-browser firefox:~/.mozilla/firefox/"
@@ -137,10 +138,10 @@ elif [ -n "$vs12xx" -a -z "$vs720p" ]; then
             done
         fi
 
-        ffmpeg $FFOPT -i "f-aud+f-vid-$IDX.mp4" -vn -acodec copy "f-aud-$IDX.m4a"
+        $FFBIN $FFOPT -i "f-aud+f-vid-$IDX.mp4" -vn -acodec copy "f-aud-$IDX.m4a"
         echo "Creating f-aud-$IDX.m4a file has been successful."
 
-        ffmpeg $FFOPT -i "f-aud+f-vid-$IDX.mp4" -c:v copy -an "f-vid-$IDX.mp4"
+        $FFBIN $FFOPT -i "f-aud+f-vid-$IDX.mp4" -c:v copy -an "f-vid-$IDX.mp4"
         echo "Creating f-vid-$IDX.mp4 file has been successful."
     done
 elif [ -n "$vs720p" -a -n "$vs12xx" ]; then
@@ -192,10 +193,10 @@ elif [ -n "$vs8xx" -a -z "$vs480p" ]; then
             done
         fi
 
-        ffmpeg $FFOPT -i "f-aud+f-vid-$IDX.mp4" -vn -acodec copy "f-aud-$IDX.m4a"
+        $FFBIN $FFOPT -i "f-aud+f-vid-$IDX.mp4" -vn -acodec copy "f-aud-$IDX.m4a"
         echo "Creating f-aud-$IDX.m4a file has been successful."
 
-        ffmpeg $FFOPT -i "f-aud+f-vid-$IDX.mp4" -c:v copy -an "f-vid-$IDX.mp4"
+        $FFBIN $FFOPT -i "f-aud+f-vid-$IDX.mp4" -c:v copy -an "f-vid-$IDX.mp4"
         echo "Creating f-vid-$IDX.mp4 file has been successful."
     done
 elif [ -n "$vs480p" -a -n "$vs8xx" ]; then
@@ -247,10 +248,10 @@ elif [ -n "$vs6xx" -a -z "$vs360p" ]; then
             done
         fi
 
-        ffmpeg $FFOPT -i "f-aud+f-vid-$IDX.mp4" -vn -acodec copy "f-aud-$IDX.m4a"
+        $FFBIN $FFOPT -i "f-aud+f-vid-$IDX.mp4" -vn -acodec copy "f-aud-$IDX.m4a"
         echo "Creating f-aud-$IDX.m4a file has been successful."
 
-        ffmpeg $FFOPT -i "f-aud+f-vid-$IDX.mp4" -c:v copy -an "f-vid-$IDX.mp4"
+        $FFBIN $FFOPT -i "f-aud+f-vid-$IDX.mp4" -c:v copy -an "f-vid-$IDX.mp4"
         echo "Creating f-vid-$IDX.mp4 file has been successful."
     done
 elif [ -n "$vs360p" -a -n "$vs6xx" ]; then
@@ -302,10 +303,10 @@ elif [ -n "$vs4xx" -a -z "$vs240p" ]; then
             done
         fi
 
-        ffmpeg $FFOPT -i "f-aud+f-vid-$IDX.mp4" -vn -acodec copy "f-aud-$IDX.m4a"
+        $FFBIN $FFOPT -i "f-aud+f-vid-$IDX.mp4" -vn -acodec copy "f-aud-$IDX.m4a"
         echo "Creating f-aud-$IDX.m4a file has been successful."
 
-        ffmpeg $FFOPT -i "f-aud+f-vid-$IDX.mp4" -c:v copy -an "f-vid-$IDX.mp4"
+        $FFBIN $FFOPT -i "f-aud+f-vid-$IDX.mp4" -c:v copy -an "f-vid-$IDX.mp4"
         echo "Creating f-vid-$IDX.mp4 file has been successful."
     done
 elif [ -n "$vs240p" -a -n "$vs4xx" ]; then

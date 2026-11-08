@@ -9,6 +9,7 @@ BASEDIR="/home/`whoami`/$WORKDIR"
 FINSDIR="$BASEDIR/Finished"
 LOGODIR="$BASEDIR/logos"
 LOGONAME="otp"
+FFBIN="/usr/local/ffmpeg/bin/ffmpeg"
 FFOPT="-hide_banner -nostdin -y"
 
 # Move to basedir.
@@ -68,7 +69,7 @@ do
         wvfiles="$(ffprobe -v error -select_streams v:0 -show_entries stream=width -of default=noprint_wrappers=1:nokey=1 -i "$dfvfiles" | grep -Eo '[0-9]+')"
 
         if [ "$wvfiles" -ge 1280 ]; then
-#            ffmpeg $FFOPT -i "$dfafiles" -i "$difiles" -i "$dfvfiles" -i "$ranlogos" \
+#            $FFBIN $FFOPT -i "$dfafiles" -i "$difiles" -i "$dfvfiles" -i "$ranlogos" \
 #            -filter_complex "[0:a]aformat=channel_layouts=stereo[a0]; \
 #                             [1:a]aformat=channel_layouts=stereo[a1]; \
 #                             [a0][a1]amerge=inputs=2,pan=stereo|c0=c0|c1=c2[audio]; \
@@ -77,7 +78,7 @@ do
 #                             [video][logo]overlay=x=main_w-overlay_w-40:y=40:format=yuv420[outv]" \
 #            -c:a mp2 -q:a 3 -b:a 320K -ar 48000 -map "[audio]" \
 #            -map "[outv]" -c:v mpeg2video -pix_fmt yuv420p -q:v 6 -r 25 -b:v 5000k -maxrate 7000k -bufsize 8000k $FFINSDIR/"$dfofiles".mpg
-            ffmpeg $FFOPT -i "$dfafiles" -i "$difiles" -i "$dfvfiles" -loop 1 -i "$ranlogos" \
+            $FFBIN $FFOPT -i "$dfafiles" -i "$difiles" -i "$dfvfiles" -loop 1 -i "$ranlogos" \
             -filter_complex "[0:a]aformat=channel_layouts=stereo[a0]; \
                              [1:a]aformat=channel_layouts=stereo[a1]; \
                              [a0][a1]amerge=inputs=2,pan=stereo|c0=c0|c1=c2[audio]; \
@@ -89,7 +90,7 @@ do
             -c:a mp2 -q:a 3 -b:a 320K -ar 48000 -map "[audio]" \
             -map "[outv]" -c:v mpeg2video -pix_fmt yuv420p -q:v 6 -r 25 -b:v 5000k -maxrate 7000k -bufsize 8000k $FFINSDIR/"$dfofiles".mpg
         elif [ "$wvfiles" -ge 854 ] && [ "$wvfiles" -lt 1280 ]; then
-#            ffmpeg $FFOPT -i "$dfafiles" -i "$difiles" -i "$dfvfiles" -i "$ranlogos" \
+#            $FFBIN $FFOPT -i "$dfafiles" -i "$difiles" -i "$dfvfiles" -i "$ranlogos" \
 #            -filter_complex "[0:a]aformat=channel_layouts=stereo[a0]; \
 #                             [1:a]aformat=channel_layouts=stereo[a1]; \
 #                             [a0][a1]amerge=inputs=2,pan=stereo|c0=c0|c1=c2[audio]; \
@@ -98,7 +99,7 @@ do
 #                             [video][logo]overlay=x=main_w-overlay_w-40:y=40:format=yuv420[outv]" \
 #            -c:a mp2 -q:a 3 -b:a 320K -ar 48000 -map "[audio]" \
 #            -map "[outv]" -c:v mpeg2video -pix_fmt yuv420p -q:v 6 -r 25 -b:v 5000k -maxrate 7000k -bufsize 8000k $FFINSDIR/"$dfofiles".mpg
-            ffmpeg $FFOPT -i "$dfafiles" -i "$difiles" -i "$dfvfiles" -loop 1 -i "$ranlogos" \
+            $FFBIN $FFOPT -i "$dfafiles" -i "$difiles" -i "$dfvfiles" -loop 1 -i "$ranlogos" \
             -filter_complex "[0:a]aformat=channel_layouts=stereo[a0]; \
                              [1:a]aformat=channel_layouts=stereo[a1]; \
                              [a0][a1]amerge=inputs=2,pan=stereo|c0=c0|c1=c2[audio]; \
@@ -110,7 +111,7 @@ do
             -c:a mp2 -q:a 3 -b:a 320K -ar 48000 -map "[audio]" \
             -map "[outv]" -c:v mpeg2video -pix_fmt yuv420p -q:v 6 -r 25 -b:v 5000k -maxrate 7000k -bufsize 8000k $FFINSDIR/"$dfofiles".mpg
         elif [ "$wvfiles" -lt 854 ]; then
-#            ffmpeg $FFOPT -i "$dfafiles" -i "$difiles" -i "$dfvfiles" -i "$ranlogos" \
+#            $FFBIN $FFOPT -i "$dfafiles" -i "$difiles" -i "$dfvfiles" -i "$ranlogos" \
 #            -filter_complex "[0:a]aformat=channel_layouts=stereo[a0]; \
 #                             [1:a]aformat=channel_layouts=stereo[a1]; \
 #                             [a0][a1]amerge=inputs=2,pan=stereo|c0=c0|c1=c2[audio]; \
@@ -119,7 +120,7 @@ do
 #                             [video][logo]overlay=x=main_w-overlay_w-40:y=40:format=yuv420[outv]" \
 #            -c:a mp2 -q:a 3 -b:a 320K -ar 48000 -map "[audio]" \
 #            -map "[outv]" -c:v mpeg2video -pix_fmt yuv420p -q:v 6 -r 25 -b:v 5000k -maxrate 7000k -bufsize 8000k $FFINSDIR/"$dfofiles".mpg
-            ffmpeg $FFOPT -i "$dfafiles" -i "$difiles" -i "$dfvfiles" -loop 1 -i "$ranlogos" \
+            $FFBIN $FFOPT -i "$dfafiles" -i "$difiles" -i "$dfvfiles" -loop 1 -i "$ranlogos" \
             -filter_complex "[0:a]aformat=channel_layouts=stereo[a0]; \
                              [1:a]aformat=channel_layouts=stereo[a1]; \
                              [a0][a1]amerge=inputs=2,pan=stereo|c0=c0|c1=c2[audio]; \
