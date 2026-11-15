@@ -350,12 +350,13 @@ else
 fi
 
 # Checking exist or not for subtitle files.
-vttid="$(ls *$UUIDG.id*.vtt 2> /dev/null)"
-vttjv="$(ls *$UUIDG.jv*.vtt 2> /dev/null)"
 vtten="$(ls *$UUIDG.en*.vtt 2> /dev/null)"
-vttsu="$(ls *$UUIDG.su*.vtt 2> /dev/null)"
-vttms="$(ls *$UUIDG.ms*.vtt 2> /dev/null)"
+vttid="$(ls *$UUIDG.id*.vtt 2> /dev/null)"
 vttja="$(ls *$UUIDG.ja*.vtt 2> /dev/null)"
+vttjv="$(ls *$UUIDG.jv*.vtt 2> /dev/null)"
+vttms="$(ls *$UUIDG.ms*.vtt 2> /dev/null)"
+vttsu="$(ls *$UUIDG.su*.vtt 2> /dev/null)"
+vttth="$(ls *$UUIDG.th*.vtt 2> /dev/null)"
 vttst="$(ls st.vtt 2> /dev/null)"
 
 # Ass's substitle style.
@@ -363,8 +364,8 @@ vttst="$(ls st.vtt 2> /dev/null)"
 sub_ass_style="subtitles=${UUIDG}.ass:force_style='FontName=Anton,FontSize=30,BorderStyle=4,BackColour=&H80000000,Outline=0,Shadow=0"
 
 # Burning subtitle to video.
-if [ -f "$UUIDG.mp4" ] && [ -f "$vttid" ]; then
-    $FFBIN $FFOPT -i "$vttid" $UUIDG.ass
+if [ -f "$UUIDG.mp4" ] && [ -f "$vtten" ]; then
+    $FFBIN $FFOPT -i "$vtten" $UUIDG.ass
     $FFBIN $FFOPT -i "$UUIDG.mp4" -vf "$sub_ass_style" "d-vid-$IDX.mp4"
 
     # Extract audio from video.
@@ -372,24 +373,28 @@ if [ -f "$UUIDG.mp4" ] && [ -f "$vttid" ]; then
 
     # Remove all audio from video.
     #$FFBIN $FFOPT -i "sub-d-vid-$IDX.mp4" -c copy -an "vid-noaudio-$IDX.mp4"
+elif [ -f "$UUIDG.mp4" ] && [ -f "$vttid" ]; then
+    $FFBIN $FFOPT -i "$vttid" $UUIDG.ass
+    $FFBIN $FFOPT -i "$UUIDG.mp4" -vf "$sub_ass_style" "d-vid-$IDX.mp4"
+    echo "Creating d-vid-$IDX.mp4 file has been successful."
+elif [ -f "$UUIDG.mp4" ] && [ -f "$vttja" ]; then
+    $FFBIN $FFOPT -i "$vttja" $UUIDG.ass
+    $FFBIN $FFOPT -i "$UUIDG.mp4" -vf "$sub_ass_style" "d-vid-$IDX.mp4"
+    echo "Creating d-vid-$IDX.mp4 file has been successful."
 elif [ -f "$UUIDG.mp4" ] && [ -f "$vttjv" ]; then
     $FFBIN $FFOPT -i "$vttjv" $UUIDG.ass
-    $FFBIN $FFOPT -i "$UUIDG.mp4" -vf "$sub_ass_style" "d-vid-$IDX.mp4"
-    echo "Creating d-vid-$IDX.mp4 file has been successful."
-elif [ -f "$UUIDG.mp4" ] && [ -f "$vtten" ]; then
-    $FFBIN $FFOPT -i "$vtten" $UUIDG.ass
-    $FFBIN $FFOPT -i "$UUIDG.mp4" -vf "$sub_ass_style" "d-vid-$IDX.mp4"
-    echo "Creating d-vid-$IDX.mp4 file has been successful."
-elif [ -f "$UUIDG.mp4" ] && [ -f "$vttsu" ]; then
-    $FFBIN $FFOPT -i "$vttsu" $UUIDG.ass
     $FFBIN $FFOPT -i "$UUIDG.mp4" -vf "$sub_ass_style" "d-vid-$IDX.mp4"
     echo "Creating d-vid-$IDX.mp4 file has been successful."
 elif [ -f "$UUIDG.mp4" ] && [ -f "$vttms" ]; then
     $FFBIN $FFOPT -i "$vttms" $UUIDG.ass
     $FFBIN $FFOPT -i "$UUIDG.mp4" -vf "$sub_ass_style" "d-vid-$IDX.mp4"
     echo "Creating d-vid-$IDX.mp4 file has been successful."
-elif [ -f "$UUIDG.mp4" ] && [ -f "$vttja" ]; then
-    $FFBIN $FFOPT -i "$vttja" $UUIDG.ass
+elif [ -f "$UUIDG.mp4" ] && [ -f "$vttsu" ]; then
+    $FFBIN $FFOPT -i "$vttsu" $UUIDG.ass
+    $FFBIN $FFOPT -i "$UUIDG.mp4" -vf "$sub_ass_style" "d-vid-$IDX.mp4"
+    echo "Creating d-vid-$IDX.mp4 file has been successful."
+elif [ -f "$UUIDG.mp4" ] && [ -f "$vttth" ]; then
+    $FFBIN $FFOPT -i "$vttth" $UUIDG.ass
     $FFBIN $FFOPT -i "$UUIDG.mp4" -vf "$sub_ass_style" "d-vid-$IDX.mp4"
     echo "Creating d-vid-$IDX.mp4 file has been successful."
 elif [ -f "$UUIDG.mp4" ] && [ -f "$vttst" ]; then
