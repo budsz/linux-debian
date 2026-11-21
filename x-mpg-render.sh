@@ -64,7 +64,7 @@ do
                              [l1][shimmer]overlay=0:0[logo_eff]; \
                              [video][logo_eff]overlay=x=main_w-overlay_w-40:y=40:format=yuv420:shortest=1[outv]" \
             -map "[outv]" -c:v mpeg2video -pix_fmt yuv420p -b:v 6000k -maxrate 9000k -bufsize 1835k -mbd 2 -trellis 2 \
-            -map "[audio]" -c:a mp2 -b:a 224k -ar 48000 -muxrate 10080k "$FFINSDIR/$dfofiles.mpg"
+            -map "[audio]" -c:a mp2 -b:a 224k -ar 48000 -muxrate 10080k "$FINSDIR/$xffiles.mpg"
         elif [ "$wvfiles" -ge 854 ] && [ "$wvfiles" -lt 1280 ]; then
             $FFBIN $FFOPT -i "$xafiles" -i "$xvfiles" -loop 1 -i "$ranlogo" \
             -filter_complex "[0:a]pan=stereo|c0=c0|c1=c1[audio]; \
@@ -74,7 +74,7 @@ do
                              [l1][shimmer]overlay=0:0[logo_eff]; \
                              [video][logo_eff]overlay=x=main_w-overlay_w-40:y=40:format=yuv420:shortest=1[outv]" \
             -map "[outv]" -c:v mpeg2video -pix_fmt yuv420p -b:v 6000k -maxrate 9000k -bufsize 1835k -mbd 2 -trellis 2 \
-            -map "[audio]" -c:a mp2 -b:a 224k -ar 48000 -muxrate 10080k "$FFINSDIR/$dfofiles.mpg"
+            -map "[audio]" -c:a mp2 -b:a 224k -ar 48000 -muxrate 10080k "$FINSDIR/$xffiles.mpg"
         elif [ "$wvfiles" -lt 854 ]; then
             $FFBIN $FFOPT -i "$xafiles" -i "$xvfiles" -loop 1 -i "$ranlogo" \
             -filter_complex "[0:a]pan=stereo|c0=c0|c1=c1[audio]; \
@@ -84,7 +84,7 @@ do
                              [l1][shimmer]overlay=0:0[logo_eff]; \
                              [video][logo_eff]overlay=x=main_w-overlay_w-40:y=40:format=yuv420:shortest=1[outv]" \
             -map "[outv]" -c:v mpeg2video -pix_fmt yuv420p -b:v 6000k -maxrate 9000k -bufsize 1835k -mbd 2 -trellis 2 \
-            -map "[audio]" -c:a mp2 -b:a 224k -ar 48000 -muxrate 10080k "$FFINSDIR/$dfofiles.mpg"
+            -map "[audio]" -c:a mp2 -b:a 224k -ar 48000 -muxrate 10080k "$FINSDIR/$xffiles.mpg"
         fi
     else
         echo "$xxfiles: Audio/video/logo files: NULL -OR- target file already exists."
