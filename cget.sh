@@ -10,7 +10,7 @@
 WORKDIR="M-ONE"
 BASEDIR="/home/`whoami`/$WORKDIR"
 RANFN="$(tr -dc '0-9a-z' < /dev/urandom | head -c 7)"
-FFBIN="/usr/local/$FFBIN/bin/ffmpeg"
+FFBIN="/usr/local/ffmpeg/bin/ffmpeg"
 _tmpfile="/tmp/$(basename $0 .sh)-$RANFN.tmp"
 
 # CD Basedir.
