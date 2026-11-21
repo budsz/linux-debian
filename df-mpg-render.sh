@@ -8,7 +8,7 @@ WORKDIR="M-ONE"
 BASEDIR="/home/`whoami`/$WORKDIR"
 FINSDIR="$BASEDIR/Finished"
 LOGODIR="$BASEDIR/logos"
-LOGONAME="otp"
+LOGONAME="xpf"
 FFBIN="/usr/local/ffmpeg/bin/ffmpeg"
 FFOPT="-hide_banner -nostdin -y"
 
