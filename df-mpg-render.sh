@@ -70,9 +70,9 @@ do
 
         if [ "$wvfiles" -ge 1280 ]; then
             $FFBIN $FFOPT -i "$dfafiles" -i "$difiles" -i "$dfvfiles" -loop 1 -i "$ranlogos" \
-            -filter_complex "[0:a]aformat=channel_layouts=stereo[a0]; \
-                             [1:a]aformat=channel_layouts=stereo[a1]; \
-                             [a0][a1]amerge=inputs=2,pan=stereo|c0=c0|c1=c2[audio]; \
+            -filter_complex "[0:a]pan=mono|c0=c0+c1[a0]; \
+                             [1:a]pan=mono|c0=c0+c1[a1]; \
+                             [a0][a1]join=inputs=2:channel_layout=stereo[audio]; \
                              [2:v]scale=-2:720,format=yuv420p[video]; \
                              [3:v]scale=70:70,format=rgba,split=2[l1][l2]; \
                              [l2]geq=r=255:g=255:b=255:a='alpha(X,Y)*if(lt(mod(T,4),0.8),exp(-pow((X+Y-mod(T,4)*200)/12,2))*0.8,0)'[shimmer]; \
@@ -82,9 +82,9 @@ do
             -map "[audio]" -c:a mp2 -b:a 224k -ar 48000 -muxrate 10080k "$FFINSDIR/$dfofiles.mpg"
         elif [ "$wvfiles" -ge 854 ] && [ "$wvfiles" -lt 1280 ]; then
             $FFBIN $FFOPT -i "$dfafiles" -i "$difiles" -i "$dfvfiles" -loop 1 -i "$ranlogos" \
-            -filter_complex "[0:a]aformat=channel_layouts=stereo[a0]; \
-                             [1:a]aformat=channel_layouts=stereo[a1]; \
-                             [a0][a1]amerge=inputs=2,pan=stereo|c0=c0|c1=c2[audio]; \
+            -filter_complex "[0:a]pan=mono|c0=c0+c1[a0]; \
+                             [1:a]pan=mono|c0=c0+c1[a1]; \
+                             [a0][a1]join=inputs=2:channel_layout=stereo[audio]; \
                              [2:v]scale=-2:720,format=yuv420p[video]; \
                              [3:v]scale=60:60,format=rgba,split=2[l1][l2]; \
                              [l2]geq=r=255:g=255:b=255:a='alpha(X,Y)*if(lt(mod(T,4),0.8),exp(-pow((X+Y-mod(T,4)*200)/12,2))*0.8,0)'[shimmer]; \
@@ -94,9 +94,9 @@ do
             -map "[audio]" -c:a mp2 -b:a 224k -ar 48000 -muxrate 10080k "$FFINSDIR/$dfofiles.mpg"
         elif [ "$wvfiles" -lt 854 ]; then
             $FFBIN $FFOPT -i "$dfafiles" -i "$difiles" -i "$dfvfiles" -loop 1 -i "$ranlogos" \
-            -filter_complex "[0:a]aformat=channel_layouts=stereo[a0]; \
-                             [1:a]aformat=channel_layouts=stereo[a1]; \
-                             [a0][a1]amerge=inputs=2,pan=stereo|c0=c0|c1=c2[audio]; \
+            -filter_complex "[0:a]pan=mono|c0=c0+c1[a0]; \
+                             [1:a]pan=mono|c0=c0+c1[a1]; \
+                             [a0][a1]join=inputs=2:channel_layout=stereo[audio]; \
                              [2:v]scale=-2:720,format=yuv420p[video]; \
                              [3:v]scale=50:50,format=rgba,split=2[l1][l2]; \
                              [l2]geq=r=255:g=255:b=255:a='alpha(X,Y)*if(lt(mod(T,4),0.8),exp(-pow((X+Y-mod(T,4)*200)/12,2))*0.8,0)'[shimmer]; \
