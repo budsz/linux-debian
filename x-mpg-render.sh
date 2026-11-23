@@ -87,7 +87,7 @@ do
             -map "[audio]" -c:a mp2 -b:a 224k -ar 48000 -muxrate 10080k "$FINSDIR/$xffiles.mpg"
         fi
     else
-        echo "$xxfiles: Audio/video/logo files: NULL -OR- target file already exists."
+        echo "$xffiles: Audio/video/logo files: NULL -OR- target file already exists."
     fi
 done
 
