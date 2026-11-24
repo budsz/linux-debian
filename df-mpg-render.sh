@@ -78,7 +78,7 @@ do
                              [l2]geq=r=255:g=255:b=255:a='alpha(X,Y)*if(lt(mod(T,4),0.8),exp(-pow((X+Y-mod(T,4)*200)/12,2))*0.8,0)'[shimmer]; \
                              [l1][shimmer]overlay=0:0[logo_eff]; \
                              [video][logo_eff]overlay=x=main_w-overlay_w-40:y=40:format=yuv420:shortest=1[outv]" \
-            -map "[outv]" -c:v mpeg2video -pix_fmt yuv420p -b:v 4000k -maxrate 6000k -bufsize 1835k -mbd 2 -trellis 2 \
+            -map "[outv]" -c:v mpeg2video -pix_fmt yuv420p -b:v 2000k -maxrate 4000k -bufsize 1835k -mbd 2 -trellis 2 \
             -map "[audio]" -c:a mp2 -b:a 224k -ar 48000 -muxrate 10080k "$FFINSDIR/$dfofiles.mpg"
         elif [ "$wvfiles" -ge 854 ] && [ "$wvfiles" -lt 1280 ]; then
             $FFBIN $FFOPT -i "$dfafiles" -i "$difiles" -i "$dfvfiles" -loop 1 -i "$ranlogos" \
@@ -90,7 +90,7 @@ do
                              [l2]geq=r=255:g=255:b=255:a='alpha(X,Y)*if(lt(mod(T,4),0.8),exp(-pow((X+Y-mod(T,4)*200)/12,2))*0.8,0)'[shimmer]; \
                              [l1][shimmer]overlay=0:0[logo_eff]; \
                              [video][logo_eff]overlay=x=main_w-overlay_w-40:y=40:format=yuv420:shortest=1[outv]" \
-            -map "[outv]" -c:v mpeg2video -pix_fmt yuv420p -b:v 4000k -maxrate 6000k -bufsize 1835k -mbd 2 -trellis 2 \
+            -map "[outv]" -c:v mpeg2video -pix_fmt yuv420p -b:v 2000k -maxrate 4000k -bufsize 1835k -mbd 2 -trellis 2 \
             -map "[audio]" -c:a mp2 -b:a 224k -ar 48000 -muxrate 10080k "$FFINSDIR/$dfofiles.mpg"
         elif [ "$wvfiles" -lt 854 ]; then
             $FFBIN $FFOPT -i "$dfafiles" -i "$difiles" -i "$dfvfiles" -loop 1 -i "$ranlogos" \
@@ -102,7 +102,7 @@ do
                              [l2]geq=r=255:g=255:b=255:a='alpha(X,Y)*if(lt(mod(T,4),0.8),exp(-pow((X+Y-mod(T,4)*200)/12,2))*0.8,0)'[shimmer]; \
                              [l1][shimmer]overlay=0:0[logo_eff]; \
                              [video][logo_eff]overlay=x=main_w-overlay_w-40:y=40:format=yuv420:shortest=1[outv]" \
-            -map "[outv]" -c:v mpeg2video -pix_fmt yuv420p -b:v 4000k -maxrate 6000k -bufsize 1835k -mbd 2 -trellis 2 \
+            -map "[outv]" -c:v mpeg2video -pix_fmt yuv420p -b:v 2000k -maxrate 4000k -bufsize 1835k -mbd 2 -trellis 2 \
             -map "[audio]" -c:a mp2 -b:a 224k -ar 48000 -muxrate 10080k "$FFINSDIR/$dfofiles.mpg"
         fi
     else
